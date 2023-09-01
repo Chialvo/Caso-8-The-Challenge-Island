@@ -7,4 +7,4 @@ class Temporada(models.Model):
     numero = models.IntegerField()
 
     def __str__(self):
-        return f'{self.nombre}+": temporada numero "+{self.numero}'
+        return f'"{self.nombre}" temporada numero {self.numero}'
