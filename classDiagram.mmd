@@ -1,0 +1,84 @@
+classDiagram
+
+    note for Habilidad "- Los metodos de seteo y crear que se definen 
+                    en la clase Habilidad son extensivos a todas las clases
+                    modeladas en el diagrama"
+
+    Temporada --> "1..*" Desafio
+    Temporada --> "1..*" RondaEliminacion
+    Temporada --> "1..*" Equipo
+    Equipo --> "1..*" Participante
+    Equipo --> "0..*" Alianza
+    Participante --> "1..*" Pais
+    Participante --> "1..*" Habilidad
+    Competencia --|> Desafio
+    Competencia --|> RondaEliminacion
+    Competencia --> Reglas
+    RondaEliminacion --> "1..*" Equipo
+    Desafio --> "1..*" Equipo
+
+    class Equipo{
+        String nombre
+        Participante participantes
+        int puntos
+        conocerParticipantes()
+        listarParticipantes()
+        formarAlianza()
+    }
+    class Participante{
+        String nombre
+        String descripcion
+        String apellido
+        Pais pais
+        Habilidad habilidad
+        String apodo
+    }
+    class Pais{
+        String nombre
+        String descripcion
+    }
+    class Habilidad{
+        String nombre
+        String descripcion
+        setNombre()
+        setDescripcion()
+        getNombre()
+        getDescripcion()
+        crear()
+    }
+    class Temporada{
+        int numero
+        String nombre
+        String ganador
+        Equipo Equipo
+        Desafio Desafio
+        RondaEliminacion RondaEliminacion
+        conocerEquipos()
+        listarEquipos()
+        conocerDesafios()
+        conocerRondasEliminacion()
+        listarDesafios()
+        listarRondasELiminacion()
+        enviarEquipos()
+    }
+    class Competencia{
+        String nombre
+        String descripcion
+        Equipo equipos
+        Reglas Reglas
+    }
+    class Desafio{
+        int puntos
+    }
+    class Reglas{
+        String nombre
+        String descripcion
+    }
+    class RondaEliminacion{
+        Equipo eliminado
+        eliminarEquipo()
+    }
+    class Alianza{
+        String nombre
+        String descripcion
+    }
