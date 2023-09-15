@@ -1,20 +1,21 @@
 classDiagram
 
-    Temporada --> "1.." Detalle_desafio
-    Detalle_desafio --> Desafio
-    Temporada --> "1.." RondaEliminacion
-    Temporada --> "1.." Equipo
-    Equipo --> "1.." Participante
-    Equipo --> "0.." Alianza
-    Participante --> "1.." Pais
-    Participante --> "1.." Habilidad
+    Temporada --> "1..*" DetalleDesafio
+    DetalleDesafio --> "1" Desafio
+    Temporada --> "1..*" RondaEliminacion
+    Temporada --> "1..*" Equipo
+    Equipo --> "1..*" Participante
+    Equipo "1..*" <-- Alianza
+    Participante --> "1..*" Pais
+    Participante --> "1..*" Habilidad
     Desafio --|> RondaEliminacion
-    Desafio --> Reglas
-    RondaEliminacion --> "1.." Equipo
+    Desafio --> "1..*" Reglas
+    RondaEliminacion --> "1..*" Equipo
     Desafio --> "1..*" Equipo
 
     class Equipo{
         String nombre
+        String imagen_representativa
         Participante participantes
         int puntos
         conocerParticipantes()
@@ -52,14 +53,20 @@ classDiagram
         String ganador
         Equipo listaEquipo
         Desafio listaDesafio
-        RondaEliminacion RondaEliminacion
+        Detalle_desafio listaDetalleDesafio
+        RondaEliminacion listaRondaEliminacion
         conocerEquipos()
-        listarEquipos()
         conocerDesafios()
+        conocerDetallesDesafios()
         conocerRondasEliminacion()
-        listarDesafios()
-        listarRondasELiminacion()
+        listaEquipos()
+        listaDesafios()
+        listaRondasELiminacion()
+        listaDetalleDesafio()
         enviarEquipos()
+        calcularPuntos()
+        generarTabla()
+        actualizarTabla()
     }
     class Desafio{
         String nombre
@@ -67,21 +74,24 @@ classDiagram
         Equipo equipos
         Reglas Reglas
     }
-    class Detalle_desafio{
+    class DetalleDesafio{
         int puntos
         Date FechaDesafio
+        Equipo ganador
     }
     class Reglas{
         String nombre
         String descripcion
     }
     class RondaEliminacion{
+        Date FechaRondaEliminacion
         Equipo eliminado
         eliminarEquipo()
     }
     class Alianza{
         String nombre
         String descripcion
+        Equipo listaEquipo
         formarAlianza()
         verAlianzasFormadas()
         eliminarAlianzas()
