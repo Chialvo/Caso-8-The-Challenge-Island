@@ -12,6 +12,7 @@ classDiagram
     Desafio --> "1..*" Reglas
     RondaEliminacion --> "1..*" Equipo
     Desafio --> "1..*" Equipo
+    Temporada --> "0..*" Alianza
 
     class Equipo{
         String nombre
@@ -20,6 +21,7 @@ classDiagram
         int puntos
         conocerParticipantes()
         listarParticipantes()
+        formarAlianza()
         estadoAlianza()
     }
     class Participante{
@@ -52,6 +54,7 @@ classDiagram
         String nombre
         String ganador
         Equipo listaEquipo
+        Alianza listaAlianza
         Desafio listaDesafio
         Detalle_desafio listaDetalleDesafio
         RondaEliminacion listaRondaEliminacion
@@ -59,10 +62,12 @@ classDiagram
         conocerDesafios()
         conocerDetallesDesafios()
         conocerRondasEliminacion()
+        conocerAlianzas()
         listaEquipos()
         listaDesafios()
         listaRondasELiminacion()
         listaDetalleDesafio()
+        listaAlianza()
         enviarEquipos()
         calcularPuntos()
         generarTabla()
@@ -92,7 +97,5 @@ classDiagram
         String nombre
         String descripcion
         Equipo listaEquipo
-        formarAlianza()
-        verAlianzasFormadas()
-        eliminarAlianzas()
+        bool estado
     }
