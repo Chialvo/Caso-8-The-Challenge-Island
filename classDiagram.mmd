@@ -1,20 +1,16 @@
 classDiagram
 
-    note for Habilidad "- Los metodos de seteo y crear que se definen 
-                    en la clase Habilidad son extensivos a todas las clases
-                    modeladas en el diagrama"
-
-    Temporada --> "1..*" Desafio
-    Temporada --> "1..*" RondaEliminacion
-    Temporada --> "1..*" Equipo
-    Equipo --> "1..*" Participante
-    Equipo --> "0..*" Alianza
-    Participante --> "1..*" Pais
-    Participante --> "1..*" Habilidad
-    Competencia --|> Desafio
-    Competencia --|> RondaEliminacion
-    Competencia --> Reglas
-    RondaEliminacion --> "1..*" Equipo
+    Temporada --> "1.." Detalle_desafio
+    Detalle_desafio --> Desafio
+    Temporada --> "1.." RondaEliminacion
+    Temporada --> "1.." Equipo
+    Equipo --> "1.." Participante
+    Equipo --> "0.." Alianza
+    Participante --> "1.." Pais
+    Participante --> "1.." Habilidad
+    Desafio --|> RondaEliminacion
+    Desafio --> Reglas
+    RondaEliminacion --> "1.." Equipo
     Desafio --> "1..*" Equipo
 
     class Equipo{
@@ -23,7 +19,7 @@ classDiagram
         int puntos
         conocerParticipantes()
         listarParticipantes()
-        formarAlianza()
+        estadoAlianza()
     }
     class Participante{
         String nombre
@@ -32,6 +28,10 @@ classDiagram
         Pais pais
         Habilidad habilidad
         String apodo
+        String estadoParticipacion
+        agregarParticipante()
+        eliminarParticipante()
+        cambiarEstado()
     }
     class Pais{
         String nombre
@@ -50,8 +50,8 @@ classDiagram
         int numero
         String nombre
         String ganador
-        Equipo Equipo
-        Desafio Desafio
+        Equipo listaEquipo
+        Desafio listaDesafio
         RondaEliminacion RondaEliminacion
         conocerEquipos()
         listarEquipos()
@@ -61,14 +61,15 @@ classDiagram
         listarRondasELiminacion()
         enviarEquipos()
     }
-    class Competencia{
+    class Desafio{
         String nombre
         String descripcion
         Equipo equipos
         Reglas Reglas
     }
-    class Desafio{
+    class Detalle_desafio{
         int puntos
+        Date FechaDesafio
     }
     class Reglas{
         String nombre
@@ -81,4 +82,7 @@ classDiagram
     class Alianza{
         String nombre
         String descripcion
+        formarAlianza()
+        verAlianzasFormadas()
+        eliminarAlianzas()
     }
