@@ -1,9 +1,58 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 {% block head %}
 
 {% endblock %}
 
 {% block content %}
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-image: url(../static/img/Fondo_header_main.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .imagen{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+    }
+    .imagen img{
+        width: 100%;
+    }
+
+    main{
+        height: 200vh;
+        background: linear-gradient(#018160,#2b5318);
+        display: flex;
+
+    }
+
+
+</style>
+
+<header>
+    <div class="imagen">
+        <img src="{%  static 'img/Logo_grande.svg'%}" alt="">
+    </div>
+</header>
+<main>
+
+
+
+
+</main>
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
