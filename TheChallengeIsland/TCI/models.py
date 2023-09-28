@@ -29,7 +29,6 @@ class Participante(models.Model):
     estadoParticipacion = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
-    imgPerfil = models.ImageField(upload_to="static/img/", null=True, blank=True)
 
 
     def agregarParticipante(self, nombre, descripcion, apellido, pais, habilidad, apodo, estadoParticipacion):
@@ -56,7 +55,6 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     puntos = models.IntegerField(default=0)
     participantes = models.ForeignKey(Participante, on_delete=models.CASCADE)
-    img_representativa = models.ImageField(upload_to="static/img/", null=True, blank=True)
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
