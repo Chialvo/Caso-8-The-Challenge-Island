@@ -29,6 +29,7 @@ class Participante(models.Model):
     estadoParticipacion = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
+    imgPerfil = models.ImageField(upload_to="static/img/", null=True, blank=True)
 
 
     def agregarParticipante(self, nombre, descripcion, apellido, pais, habilidad, apodo, estadoParticipacion):
@@ -55,6 +56,7 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     puntos = models.IntegerField(default=0)
     participantes = models.ForeignKey(Participante, on_delete=models.CASCADE)
+    img_representativa = models.ImageField(upload_to="static/img/", null=True, blank=True)
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
@@ -111,11 +113,11 @@ class Temporada(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.IntegerField()
     ganador = models.CharField(max_length=40, blank=True, null=True)
-    listaEquipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, null=True)
-    listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True)
-    listaDesafio = models.ForeignKey(Desafio, on_delete=models.CASCADE, null=True)
-    listaDetalleDesafio = models.ForeignKey(Detalle_desafio, on_delete=models.CASCADE, null=True)
-    listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True)
+    listaEquipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, null=True, blank=True)
+    listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
+    listaDesafio = models.ForeignKey(Desafio, on_delete=models.CASCADE, null=True, blank=True)
+    listaDetalleDesafio = models.ForeignKey(Detalle_desafio, on_delete=models.CASCADE, null=True, blank=True)
+    listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'"{self.nombre}" temporada numero {self.numero}' 
