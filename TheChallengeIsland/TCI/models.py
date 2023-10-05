@@ -19,7 +19,9 @@ class Habilidad(models.Model):
 
 class Pais(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return f"{self.nombre}"
 
 class Participante(models.Model):
     nombre = models.CharField(max_length=50)
