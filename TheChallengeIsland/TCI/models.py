@@ -31,7 +31,8 @@ class Participante(models.Model):
     estadoParticipacion = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
-
+    def __str__(self) -> str:
+        return f"{self.nombre}"
 
     def agregarParticipante(self, nombre, descripcion, apellido, pais, habilidad, apodo, estadoParticipacion):
         nuevo_participante = Participante(
@@ -56,7 +57,7 @@ class Participante(models.Model):
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     puntos = models.IntegerField(default=0)
-    participantes = models.ForeignKey(Participante, on_delete=models.CASCADE)
+    participantes = models.ManyToManyField('Participante')
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
