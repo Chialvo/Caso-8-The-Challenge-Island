@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Kanit&family=Merriweather+Sans&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Italianno', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+nav{
+    margin-top: 2.5vw;
+    background-color: green;
+    width: 95vw;
+    height: 150px;
+    border-radius: 30px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.nav-botones{
+    width: 35vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-boton{
+    padding: 5px 0;
+    text-decoration: none;
+    font-size: larger;
+    color: greenyellow;
+    border-bottom: 3px green solid;
+    transition: all 0.5s ease;
+}
+
+.nav-boton:hover{
+    margin-bottom: 10px;
+    border-bottom: 3px greenyellow solid;
+    transition: all 0.5s ease;
+}
+
+
+.nav-contenedor{
+    width: 100px;
+    border: 5px greenyellow solid;
+    height: 100px;
+    border-radius: 50%;
+}
+
+
+.nav-agrupador{
+    border-radius: 30px;
+    border: 3px greenyellow solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.nav-agrupador input{
+    margin: 10px 0 10px 20px;
+    font-size: larger;
+    color: greenyellow;
+    background-color: green;
+    border: none;
+    transition: all 0.3s ease;
+    border-bottom: 3px green solid;
+}
+.nav-agrupador input:hover{
+    border-bottom: 3px greenyellow solid;
+    transition: all 0.3s ease;
+}
+
+.nav-agrupador input:focus {
+    outline: none;
+    border-bottom: 3px greenyellow solid;
+}
+.nav-agrupador span{
+    padding: 0 10px;
+    font-size: 30px;
+    color: greenyellow;
+}
