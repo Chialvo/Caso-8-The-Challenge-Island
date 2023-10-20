@@ -27,7 +27,7 @@ class Participante(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     apodo = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=500)
     estadoParticipacion = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
