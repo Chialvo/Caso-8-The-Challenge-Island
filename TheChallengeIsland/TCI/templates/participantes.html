@@ -14,11 +14,14 @@
         <h2>{{ participante.nombre }}</h2> 
         <h3>"{{ participante.apodo }}"</h3> 
         <div class="participante-tarjeta-descripcion">
-            {{ participante.descripcion}}   
+            <p class="participante-tarjeta-descripcion-p" id="descripcion">{{ participante.descripcion }}</p>
         </div>
+        
         <h4>{{ participante.estadoParticipacion }}</h4>
     </div>
     {% endfor %}
 </main>
+
+
 
 {% endblock %}
