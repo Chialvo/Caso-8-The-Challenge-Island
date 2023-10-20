@@ -1,0 +1,41 @@
+
+.temporada-main{
+    margin-top: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.temporada-tarjeta{
+    margin: 5vh ;
+    width: 30vw;
+    height: 65vh;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 50px;
+    border: green solid 5px;
+    
+}
+
+.tarjeta-contenedor{
+    margin: 2vw 0;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    border: 5px green solid;
+}
+.tarjeta-contenedor img{
+    size-adjust: 100%;
+}
+
+.tarjeta-descripcion{
+
+    border: 2px black solid;
+    width: 80%;
+    height: 30%;
+
+}

@@ -1,57 +1,23 @@
-{% load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temporadas</title>
-</head>
-<style>
-    body{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .tarjeta{
-        margin: 10vh 0;
-        width: 30vw;
-        height: 85vh;
-        border: 2px solid black;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    
-    .contenedor{
-        width: 15vw;
-        height:15vw;
-        border-radius: 50%;
-        border: 2px black solid;
-    }
-    img{
-        size-adjust: 100%;
-    }
-
-    .contenedor-descripcion{
-        margin: 5vh;
-        border: 2px black solid;
-        width: 80%;
-        height: 40%;
-
-    }
-
-</style>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/temporadas.css' %}">
+{% endblock %}
+{% block content %}
+<main class="temporada-main">
     {% for temporada in temporadas %}
-    <div class="tarjeta">
+    <div class="temporada-tarjeta">
+        
+        <div class="tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></div>
         <h2>{{ temporada.nombre }}</h2>  
-        <div class="contenedor"><img src="static/img/02.jpg" alt=""></div>
-        <div class="contenedor-descripcion">
+        <div class="tarjeta-descripcion">
             {{ temporada.ganador}}
 
         </div>
         
     </div>
     {% endfor %}
-</body>
-</html>
+</main>
+
+
+{% endblock %}

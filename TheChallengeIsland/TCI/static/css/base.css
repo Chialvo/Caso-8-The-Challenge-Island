@@ -12,9 +12,9 @@ body{
     justify-content: center;
 }
 nav{
-    margin-top: 2.5vw;
+    margin-top: 1vw;
     background-color: green;
-    width: 95vw;
+    width: 98vw;
     height: 150px;
     border-radius: 30px;
     position: fixed;

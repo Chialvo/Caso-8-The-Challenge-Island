@@ -1,9 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head %}
-
+    <link rel="stylesheet" href="{% static 'css/equipos.css' %}">
 {% endblock %}
         
 {% block content %}
+
+<main class="equipo-main">
+    {% for equipo in equipos %}
+    <div class="equipo-tarjeta">
+        
+        <div class="equipo-tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></div>
+        <h2>{{ equipo.nombre }}</h2>  
+        <div class="equipo-tarjeta-descripcion">
+            {{ equipo.ganador}}
+
+        </div>
+        
+    </div>
+    {% endfor %}
+</main>
 
 {% endblock %}
