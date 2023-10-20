@@ -1,4 +1,4 @@
-.equipo-main{
+.participante-main{
     margin-top: 200px;
     display: flex;
     flex-wrap: wrap;
@@ -6,10 +6,10 @@
     align-items: center;
 }
 
-.equipo-tarjeta{
+.participante-tarjeta{
     margin: 5vh ;
-    width: 25vw;
-    height: 60vh;
+    width: 20vw;
+    height: 55vh;
     border: 2px solid black;
     display: flex;
     align-items: center;
@@ -17,19 +17,19 @@
     border-radius: 50px;
     border: green solid 5px;
 }
-.equipo-tarjeta-contenedor{
+.participante-tarjeta-contenedor{
     margin: 1vw 0;
-    width: 15vw;
-    height: 15vw;
+    width: 10vw;
+    height: 10vw;
     border-radius: 50%;
     border: 5px green solid;
 
 }
-.equipo-tarjeta h2{
+.participante-tarjeta h2{
     font-size: larger;
 }
 
-.equipo-tarjeta-descripcion{
+.participante-tarjeta-descripcion{
     margin: 1vw 0;
     border: 1px solid black;
     width: 80%;

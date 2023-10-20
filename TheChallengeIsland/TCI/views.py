@@ -30,8 +30,9 @@ def temporadas(request):
     return render(request, "temporadas.html", {'temporadas': temporadas})
 
 def equipos(request):
-
     equipos = Equipo.objects.all()
-    print("_"*50)
-    print(equipos)
     return render(request, "equipos.html", {'equipos': equipos})
+
+def participantes(request):
+    participantes = Participante.objects.all()
+    return render(request, "participantes.html", {'participantes': participantes})
