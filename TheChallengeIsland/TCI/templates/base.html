@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>The challenge island</title>
+    {% block head %}
+
+
+    {% endblock %}
+</head>
+<nav>
+    <div class="nav-contenedor hijo"></div>
+    <div class="nav-botones hijo">
+        <a href="" class="nav-boton">Temporadas</a>
+        <a href="" class="nav-boton">Equipos</a>
+        <a href="" class="nav-boton">Participantes</a>
+    </div>
+    <div class="nav-agrupador hijo">
+        <input type="text">
+        <span class="material-symbols-outlined">
+            search
+        </span>
+    </div>
+</nav>
+{% block content %}
+
+{% endblock %}
+<footer>
+
+
+</footer>
+</html>
