@@ -16,16 +16,18 @@
 <nav>
     <div class="nav-contenedor hijo"></div>
     <div class="nav-botones hijo">
-        <a href="" class="nav-boton">Temporadas</a>
-        <a href="" class="nav-boton">Equipos</a>
-        <a href="" class="nav-boton">Participantes</a>
+        <a href="{% url 'temporadas' %}" class="nav-boton">Temporadas</a>
+        <a href="{% url 'equipos' %}" class="nav-boton">Equipos</a>
+        <a href="{% url 'home' %}" class="nav-boton">Participantes</a>
     </div>
-    <div class="nav-agrupador hijo">
-        <input type="text">
-        <span class="material-symbols-outlined">
-            search
-        </span>
-    </div>
+    <form method="get" class="nav-agrupador hijo">
+        <input type="text" placeholder="Buscador" name="buscador" value="{{ request.GET.buscador }}">
+        <button type="submit" class="nav-agrupador-boton">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+        </button>
+    </form>
 </nav>
 {% block content %}
 

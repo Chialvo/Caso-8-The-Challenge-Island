@@ -69,20 +69,60 @@ nav{
     color: greenyellow;
     background-color: green;
     border: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s ;
     border-bottom: 3px green solid;
+}
+
+.nav-agrupador input::placeholder {
+    color: rgba(172, 255, 47, 0.574);
+    transition: all 0.3s ;
+
 }
 .nav-agrupador input:hover{
     border-bottom: 3px greenyellow solid;
-    transition: all 0.3s ease;
+    transition: all 0.3s ;
+}
+
+.nav-agrupador input:hover::placeholder {
+    color: rgb(172, 255, 47);
+    transition: all 0.3s ;
+
 }
 
 .nav-agrupador input:focus {
     outline: none;
     border-bottom: 3px greenyellow solid;
 }
+
+.nav-agrupador input:focus::placeholder {
+    color: rgba(172, 255, 47, 0);
+}
+
+.nav-agrupador-boton{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.nav-agrupador-boton:hover{
+    background-color: rgb(12, 110, 12);
+    transition: all 0.3s;
+
+}
+
+.nav-agrupador-boton:hover span{
+    color: rgb(153, 255, 0);
+    transition: all 0.3s;
+}
+
 .nav-agrupador span{
-    padding: 0 10px;
+    padding: 0;
     font-size: 30px;
     color: greenyellow;
 }

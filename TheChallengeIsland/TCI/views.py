@@ -18,6 +18,6 @@ def temporadas(request):
     temporadas = Temporada.objects.all()
     return render(request, "temporadas.html", {'temporadas': temporadas})
 
-def equipo(request):
+def equipos(request):
     equipos = Equipo.objects.all()
     return render(request, "equipos.html", {'equipos': equipos})
