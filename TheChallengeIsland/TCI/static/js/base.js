@@ -6,18 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nav_input) {
         // Función para aplicar cambios
         const applyChanges = function() {
-            aux.style.border = '3px solid greenyellow';
-            nav_input.style.borderBottom = '3px solid greenyellow';
-            nav_span.style.color = 'greenyellow';
+            aux.style.border = '3px solid #a9cd5b';
+            nav_input.style.borderBottom = '3px solid #a9cd5b';
+            nav_span.style.color = '#a9cd5b';
         };
 
         // Función para restablecer cambios
         const resetChanges = function() {
             if (!nav_input.matches(':focus')) {
-                aux.style.border = '3px solid rgb(172, 255, 47, 0.574)';
+                aux.style.border = '3px solid #209e60';
                 if (nav_input.value.trim() === '') {
-                    nav_span.style.color = 'rgb(172, 255, 47, 0.574)';
-                    nav_input.style.borderBottom = '3px solid rgb(172, 255, 47, 0.574)';
+                    nav_span.style.color = '#209e60';
+                    nav_input.style.borderBottom = '3px solid #209e60';
                 }
             }
         };
@@ -39,18 +39,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Evento de entrada de texto en el input
         nav_input.addEventListener('input', function() {
             if (nav_input.value.trim() === '') {
-                nav_span.style.color = 'greenyellow';
-                nav_input.style.borderBottom = '3px solid greenyellow';
+                nav_span.style.color = '#a9cd5b';
+                nav_input.style.borderBottom = '3px solid #a9cd5b';
             } else {
-                nav_input.style.borderBottom = '3px solid greenyellow';
+                nav_input.style.borderBottom = '3px solid #a9cd5b';
             }
         });
 
         // Evento de pérdida de enfoque en el input
         nav_input.addEventListener('blur', function() {
             if (nav_input.value.trim() === '') {
-                nav_span.style.color = 'rgb(172, 255, 47, 0.574)';
-                nav_input.style.borderBottom = '3px solid rgb(172, 255, 47, 0.574)';
+                nav_span.style.color = '#209e60';
+                nav_input.style.borderBottom = '3px solid #209e60';
             }
         });
     }

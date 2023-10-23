@@ -4,9 +4,12 @@ from TCI.models import *
 
 
 # Create your views here.
+def prueba(request):
+    return render(request, "index.html")
+
 
 def home(request):
-    return render(request, "index.html")
+    return render(request, "home.html")
 
 def login(request):
     return render(request, "login.html")
@@ -19,12 +22,6 @@ def lista_equipos(request):
         participantes = Participante.objects.filter(equipo=equipo)
         data.append({'equipo': equipo, 'participantes': participantes})
         return render(request, 'pruebaequipos.html', {'data': data})
-
-def prueba(request):
-    paises = Participante.objects.all()
-    
-    return render(request, "prueba.html", {'paises': paises})
-
 def temporadas(request):
     temporadas = Temporada.objects.all()
 

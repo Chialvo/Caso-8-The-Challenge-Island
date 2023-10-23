@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Italianno&family=Kanit&family=Merriweather+Sans&display=swap');
 
+:root {
+    --color-1: #1a1b06;
+    --color-2: #209e60;
+    --color-3: #214a32;
+    --color-4: #a9cd5b;
+    --color-5: #d9d986;
+}
+
+
 *{
     padding: 0;
     margin: 0;
@@ -22,7 +31,7 @@ html {
 }
 nav{
     margin-top: 1vw;
-    background-color: green;
+    background-color: var(--color-3);
     width: 98vw;
     height: 150px;
     border-radius: 30px;
@@ -43,22 +52,22 @@ nav{
     padding: 5px 0;
     text-decoration: none;
     font-size: larger;
-    color: rgb(172, 255, 47, 0.574);
-    border-bottom: 3px green solid;
+    color: var(--color-2);
+    border-bottom: 3px var(--color-3) solid;
     transition: all 0.5s ease;
 }
 
 .nav-boton:hover{
     margin-bottom: 10px;
-    border-bottom: 3px greenyellow solid;
-    color: greenyellow;
+    border-bottom: 3px var(--color-4) solid;
+    color: var(--color-4);
     transition: all 0.5s ease;
 }
 
 
 .nav-contenedor{
     width: 100px;
-    border: 5px greenyellow solid;
+    border: 5px var(--color-4) solid;
     height: 100px;
     border-radius: 50%;
 }
@@ -66,7 +75,7 @@ nav{
 
 .nav-agrupador{
     border-radius: 30px;
-    border: 3px rgb(172, 255, 47, 0.574) solid;
+    border: 3px var(--color-2) solid;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,37 +87,37 @@ nav{
 .nav-agrupador input{
     margin: 10px 0 10px 20px;
     font-size: larger;
-    color: greenyellow;
-    background-color: green;
+    color: var(--color-4);
+    background-color: var(--color-3);
     border: none;
     transition: all 0.3s ;
-    border-top: green 3px solid;
-    border-bottom: 3px solid rgba(172, 255, 47, 0.574);
+    border-top: var(--color-3) 3px solid;
+    border-bottom: 3px solid var(--color-2);
 }
 
 .nav-agrupador input::placeholder {
-    color: rgba(172, 255, 47, 0.574);
+    color: var(--color-2);
     transition: all 0.3s ;
 
 }
 .nav-agrupador input:hover{
-    border-bottom: 3px greenyellow solid;
+    border-bottom: 3px var(--color-4) solid;
     transition: all 0.3s ;
 }
 
 .nav-agrupador input:hover::placeholder {
-    color: rgb(172, 255, 47);
+    color: var(--color-4);
     transition: all 0.3s ;
 
 }
 
 .nav-agrupador input:focus {
     outline: none;
-    border-bottom: 3px greenyellow solid;
+    border-bottom: 3px var(--color-4) solid;
 }
 
 .nav-agrupador input:focus::placeholder {
-    color: rgba(172, 255, 47, 0);
+    color: var(--color-3);
 }
 
 .nav-agrupador-boton{
@@ -116,7 +125,7 @@ nav{
     height: 50px;
     border: none;
     border-radius: 50%;
-    background-color: green;
+    background-color: var(--color-3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,27 +133,27 @@ nav{
 }
 
 .nav-agrupador-boton:hover{
-    background-color: rgb(12, 110, 12);
+    background-color: #23372c;
     transition: all 0.3s;
 
 }
 
 .nav-agrupador-boton:hover span{
-    color: rgb(153, 255, 0);
-    transition: all 0.3s;
+    color: var(--color-2);
+    transition: all 0.35s;
 }
 
 .nav-agrupador span{
     padding: 0;
     font-size: 30px;
-    color: rgb(172, 255, 47, 0.574);
+    color: var(--color-2);
     transition: all 0.3s;
 }
 
 .nav-admin {
     margin-left: 0; /* Empuja el elemento hacia la derecha */
     border-radius: 50%;
-    border: solid 3px rgba(172, 255, 47, 0.574);
+    border: solid 3px var(--color-2);
     text-decoration: none;
 }
 
@@ -153,7 +162,7 @@ nav{
     justify-content: center;
     align-items: center;
     outline: none;
-    color: rgb(172, 255, 47 ,0.574);
+    color: var(--color-2);
     font-size: x-large;
     margin: 10px;
     transition: all .3s;
@@ -161,30 +170,28 @@ nav{
 }
 
 .nav-admin:hover{
-    border: 3px solid greenyellow;
+    border: 3px solid var(--color-4);
     transition: all .3s;
 
 }
 
 .nav-admin:hover span{
-    color: greenyellow;
+    color: var(--color-4);
     transition: all .3s;
 }
 
 
 
-
-
-footer{
+footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     text-align: center;
     padding: 10px; /* Añade espacio alrededor del contenido del footer si es necesario */
-    background-color: green;
+    background-color: #214a32; /* Cambia el color de fondo a #214a32 */
 }
 
-.footer-contenedor{
+.footer-contenedor {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -193,37 +200,34 @@ footer{
     align-items: center;
 }
 
-.footer-menu{
+.footer-menu {
     font-family: 'Italianno', cursive;
     font-family: 'Kanit', sans-serif;
     font-family: 'Merriweather Sans', sans-serif;
     font-size: larger;
     border-radius: 30px;
-    border: 3px rgba(172, 255, 47, 0.574) solid;
+    border: 3px var(--color-2) solid; /* Cambia el color del borde */
     text-decoration: none;
     width: 13%;
-    color: rgba(172, 255, 47, 0.574);
-    border-radius: 30px;
-    transition: all 0.3s ;
+    color: var(--color-2); /* Cambia el color de texto */
+    transition: all 0.3s;
 }
 
-.footer-menu:hover{
-    color: greenyellow;
-    border: 3px greenyellow solid;
-    transition: all 0.3s ;
+.footer-menu:hover {
+    color: #a9cd5b; /* Cambia el color al hacer hover */
+    border: 3px #a9cd5b solid; /* Cambia el color del borde al hacer hover */
+    transition: all 0.3s;
 }
 
-.footer-integrantes{
+.footer-integrantes {
     width: 50%;
     display: flex;
     justify-content: space-between;
-
 }
 
-.footer-integrantes h3{
+.footer-integrantes h3 {
     margin: auto 0;
-    border-bottom: 3px solid rgba(172, 255, 47, 0.574);
-    color: rgba(172, 255, 47, 0.574);
+    border-bottom: 3px solid #209e60; /* Cambia el color del borde inferior */
+    color: #209e60; /* Cambia el color del texto */
     font-size: larger;
-
 }
