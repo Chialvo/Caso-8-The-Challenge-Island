@@ -56,7 +56,6 @@ class Participante(models.Model):
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
-    puntos = models.IntegerField(default=0)
     participantes = models.ManyToManyField('Participante')
 
     def conoceraparticipantes(self, participante):
@@ -96,13 +95,15 @@ class Desafio(models.Model):
     reglas = models.ForeignKey(Reglas, on_delete=models.CASCADE)
 
 class Detalle_desafio(models.Model):
-    puntos = models.IntegerField()
+    puntos = models.IntegerField(unique=True, default=0)
     fechadesafio = models.DateField()
     ganador = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    desafios = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
 
 class RondaEliminacion(models.Model):
     fechaRondaEliminacion = models.DateField()
     eliminado = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    desafios = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
 
     def __init__(self):
         self.eliminado = None
@@ -113,50 +114,41 @@ class RondaEliminacion(models.Model):
 class Temporada(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.IntegerField()
-    ganador = models.CharField(max_length=40, blank=True, null=True)
-    listaEquipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, null=True, blank=True)
+    puntos = models.OneToOneField(Detalle_desafio, to_field="puntos", null=True, on_delete=models.CASCADE)
+    listaEquipo = models.ManyToManyField("Equipo")
     listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
-    listaDesafio = models.ForeignKey(Desafio, on_delete=models.CASCADE, null=True, blank=True)
-    listaDetalleDesafio = models.ForeignKey(Detalle_desafio, on_delete=models.CASCADE, null=True, blank=True)
+    listaDetalleDesafio = models.ManyToManyField("Detalle_desafio")
     listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'"{self.nombre}" temporada numero {self.numero}' 
     
     def conocerEquipos(self):
-        return self.listaEquipo.all()
+        pass
     
     def conocerAlianzas(self):
-        return self.listaAlianza.all()
+        pass
     
     def conocerDesafios(self):
-        return self.listaDesafio.all()
+        pass
     
     def conocerDetallesDesafios(self):
-        return self.listaDetalleDesafio.all()
+        pass
     
     def conocerRondasEliminacion(self):
-        return self.listaRondaEliminacion.all()
+        pass
     
     def listaEquipos(self):
-        equipos = self.listaEquipo.all()
-        return [equipo.nombre for equipo in equipos]
+        pass
     
     def listaAlianzas(self):
-        alianzas = self.listaAlianza.all()
-        return [alianza.nombre for alianza in alianzas]
-    
-    def listaDesafios(self):
-        desafios = self.listaDesafio.all()
-        return [desafio.nombre for desafio in desafios]
+        pass
     
     def listaRondasELiminacion(self):
-        rondas = self.listaRondaEliminacion.all()
-        return [ronda.nombre for ronda in rondas]
+        pass
     
     def listaDetalleDesafio(self):
-        detalles = self.listaDetalleDesafio.all()
-        return [detalle.nombre for detalle in detalles]
+        pass
     
     def enviarEquipos(self):
         pass
