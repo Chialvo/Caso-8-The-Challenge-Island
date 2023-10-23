@@ -25,7 +25,7 @@
 
 .tarjeta-contenedor{
     width: 20%;
-    height: 80%;
+    height: 90%;
     border-radius: 40px ;
     border: 5px green solid;
 }
@@ -48,4 +48,8 @@
     align-items: center;
     justify-content: center;
     width: 15%;
+}
+.temporada-tarjeta h2{
+    font-weight: bolder;
+    font-size: xx-large;
 }

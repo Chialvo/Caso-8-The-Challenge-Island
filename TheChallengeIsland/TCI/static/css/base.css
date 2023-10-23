@@ -70,6 +70,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: -50px;
     transition: all 0.3s;
 
 }
@@ -139,6 +140,40 @@ nav{
     color: rgb(172, 255, 47, 0.574);
     transition: all 0.3s;
 }
+
+.nav-admin {
+    margin-left: 0; /* Empuja el elemento hacia la derecha */
+    border-radius: 50%;
+    border: solid 3px rgba(172, 255, 47, 0.574);
+    text-decoration: none;
+}
+
+.nav-admin span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    color: rgb(172, 255, 47 ,0.574);
+    font-size: x-large;
+    margin: 10px;
+    transition: all .3s;
+
+}
+
+.nav-admin:hover{
+    border: 3px solid greenyellow;
+    transition: all .3s;
+
+}
+
+.nav-admin:hover span{
+    color: greenyellow;
+    transition: all .3s;
+}
+
+
+
+
 
 footer{
     position: absolute;
