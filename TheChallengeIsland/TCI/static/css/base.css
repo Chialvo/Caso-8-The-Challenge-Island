@@ -10,6 +10,15 @@
 body{
     display: flex;
     justify-content: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 150px; /* Ajusta este valor según la altura de tu footer */
+    
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
 nav{
     margin-top: 1vw;
@@ -34,7 +43,7 @@ nav{
     padding: 5px 0;
     text-decoration: none;
     font-size: larger;
-    color: greenyellow;
+    color: rgb(172, 255, 47, 0.574);
     border-bottom: 3px green solid;
     transition: all 0.5s ease;
 }
@@ -42,6 +51,7 @@ nav{
 .nav-boton:hover{
     margin-bottom: 10px;
     border-bottom: 3px greenyellow solid;
+    color: greenyellow;
     transition: all 0.5s ease;
 }
 
@@ -56,10 +66,11 @@ nav{
 
 .nav-agrupador{
     border-radius: 30px;
-    border: 3px greenyellow solid;
+    border: 3px rgb(172, 255, 47, 0.574) solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s;
 
 }
 
@@ -70,7 +81,8 @@ nav{
     background-color: green;
     border: none;
     transition: all 0.3s ;
-    border-bottom: 3px green solid;
+    border-top: green 3px solid;
+    border-bottom: 3px solid rgba(172, 255, 47, 0.574);
 }
 
 .nav-agrupador input::placeholder {
@@ -124,5 +136,59 @@ nav{
 .nav-agrupador span{
     padding: 0;
     font-size: 30px;
+    color: rgb(172, 255, 47, 0.574);
+    transition: all 0.3s;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px; /* Añade espacio alrededor del contenido del footer si es necesario */
+    background-color: green;
+}
+
+.footer-contenedor{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-menu{
+    font-family: 'Italianno', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: larger;
+    border-radius: 30px;
+    border: 3px rgba(172, 255, 47, 0.574) solid;
+    text-decoration: none;
+    width: 13%;
+    color: rgba(172, 255, 47, 0.574);
+    border-radius: 30px;
+    transition: all 0.3s ;
+}
+
+.footer-menu:hover{
     color: greenyellow;
+    border: 3px greenyellow solid;
+    transition: all 0.3s ;
+}
+
+.footer-integrantes{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.footer-integrantes h3{
+    margin: auto 0;
+    border-bottom: 3px solid rgba(172, 255, 47, 0.574);
+    color: rgba(172, 255, 47, 0.574);
+    font-size: larger;
+
 }
