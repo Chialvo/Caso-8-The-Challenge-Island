@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 from .models import *
 from TCI.models import *
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth import logout
 
 # Create your views here.
 def prueba(request):
@@ -36,3 +36,7 @@ def equipos(request):
 def participantes(request):
     participantes = Participante.objects.all()
     return render(request, "participantes.html", {'participantes': participantes})
+
+def exit(request):
+    logout(request)
+    return redirect('home')
