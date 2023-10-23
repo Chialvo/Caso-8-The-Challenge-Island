@@ -1,6 +1,7 @@
 from django.db import models
 
 class Habilidad(models.Model):
+    nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
 
     def setDescripcion(self, nueva_descripcion):
@@ -114,10 +115,10 @@ class RondaEliminacion(models.Model):
 class Temporada(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.IntegerField()
-    puntos = models.OneToOneField(Detalle_desafio, to_field="puntos", null=True, on_delete=models.CASCADE)
+    puntos = models.OneToOneField(Detalle_desafio, to_field="puntos", null=True, related_name="temporada_puntos", on_delete=models.CASCADE)
     listaEquipo = models.ManyToManyField("Equipo")
     listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
-    listaDetalleDesafio = models.ManyToManyField("Detalle_desafio")
+    listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
     listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
@@ -147,8 +148,9 @@ class Temporada(models.Model):
     def listaRondasELiminacion(self):
         pass
     
-    def listaDetalleDesafio(self):
-        pass
+    def listaDetalleDesafios(self):
+        detalles = self.listaDetalleDesafio.all()
+        return [detalle.nombre for detalle in detalles]
     
     def enviarEquipos(self):
         pass
@@ -161,6 +163,18 @@ class Temporada(models.Model):
     
     def actualizarTabla(self):
         pass
+
+    def calcularGanador(self):
+        equipos = self.listaEquipo.all()
+        ganador = None
+        max_puntos = 0
+
+        for equipo in equipos:
+            if equipo.puntos and equipo.puntos.puntos > max_puntos:
+                max_puntos = equipo.puntos.puntos
+                ganador = equipo
+
+        return ganador
 
 
 
