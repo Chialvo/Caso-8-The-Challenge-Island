@@ -27,6 +27,7 @@ def prueba(request):
 
 def temporadas(request):
     temporadas = Temporada.objects.all()
+
     return render(request, "temporadas.html", {'temporadas': temporadas})
 
 def equipos(request):
