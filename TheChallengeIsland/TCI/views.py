@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from .models import *
 from TCI.models import *
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 def prueba(request):
@@ -23,15 +24,20 @@ def lista_equipos(request):
         data.append({'equipo': equipo, 'participantes': participantes})
         return render(request, 'pruebaequipos.html', {'data': data})
     
+@login_required
 def temporadas(request):
     temporadas = Temporada.objects.all()
 
     return render(request, "temporadas.html", {'temporadas': temporadas})
-
+@login_required
 def equipos(request):
     equipos = Equipo.objects.all()
     return render(request, "equipos.html", {'equipos': equipos})
-
+@login_required
 def participantes(request):
     participantes = Participante.objects.all()
     return render(request, "participantes.html", {'participantes': participantes})
+
+def exit(request):
+    logout(request)
+    return render(request,'home.html')

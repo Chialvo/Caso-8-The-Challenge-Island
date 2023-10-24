@@ -30,12 +30,19 @@
             </span>
         </button>
     </form>
-
+{% if request.user.is_authenticated %}
     <a href="{% url 'login' %}" class="nav-admin">
         <span class="material-symbols-outlined">
             manage_accounts
             </span>     
     </a>
+{% else %}
+    <a href="{% url 'exit' %}" class="nav-admin">
+        <span class="material-symbols-outlined">
+            manage_accounts
+            </span>     
+    </a>
+{% endif %}
 </nav>
 
     {% block content %}
@@ -44,7 +51,7 @@
 
 <footer class="">
     <div class="footer-contenedor">
-        <a class="footer-menu" href="">Menú</a>
+        <a class="footer-menu" href="{% url 'home' %}">Menú</a>
         <div class="footer-integrantes">
             <h3>Lautaro Chialvo</h3>
             <h3>Alejo <i> Budi<s style="color: green;">-</s></i>Vaquero</h3>
