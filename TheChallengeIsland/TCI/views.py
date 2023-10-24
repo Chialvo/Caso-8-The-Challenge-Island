@@ -22,6 +22,7 @@ def lista_equipos(request):
         participantes = Participante.objects.filter(equipo=equipo)
         data.append({'equipo': equipo, 'participantes': participantes})
         return render(request, 'pruebaequipos.html', {'data': data})
+    
 def temporadas(request):
     temporadas = Temporada.objects.all()
 
