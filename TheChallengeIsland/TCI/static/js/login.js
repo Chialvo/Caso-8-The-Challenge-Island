@@ -1,12 +1,9 @@
-console.log("1")
 document.addEventListener('DOMContentLoaded', function(){
-    console.log("2")
     const input_useranme = document.getElementById("input-username");
     const input_password = document.getElementById("input-password");
     const span_eye = document.getElementById("span-eye");
     const div_username = document.getElementById("div-username");
     const div_password = document.getElementById("div-password");
-    console.log("3")
 
     if(input_useranme && input_password){
 
@@ -57,18 +54,14 @@ document.addEventListener('DOMContentLoaded', function(){
     span_eye.addEventListener('mouseleave', desactivarDivPassword);
 
     };
-    console.log("10")
     if(span_eye){
         let passwordVisible = false;
-        console.log("11")
         span_eye.addEventListener('click', () => {
             passwordVisible = !passwordVisible;
         if (passwordVisible) {
-            console.log("12")
             input_password.type = 'text';
             span_eye.textContent = 'visibility';
         } else {    
-            console.log("13")
             input_password.type = 'password';
             span_eye.textContent = 'visibility_off';
     }

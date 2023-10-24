@@ -39,4 +39,4 @@ def participantes(request):
 
 def exit(request):
     logout(request)
-    return redirect('home')
+    return render(request,'home.html')

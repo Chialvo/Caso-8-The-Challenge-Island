@@ -19,12 +19,16 @@ body{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 30vw;
-    height: 30vw;
+    width: 25vw;
+    height: 25vw;
     background-color: var(--color-3) ;
     border-radius: 40px;
     padding: 10px;
 
+}
+
+input{
+    font-size: larger;
 }
 
 input{
