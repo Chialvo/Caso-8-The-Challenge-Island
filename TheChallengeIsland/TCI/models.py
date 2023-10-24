@@ -29,7 +29,7 @@ class Participante(models.Model):
     apellido = models.CharField(max_length=50)
     apodo = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=500)
-    estadoParticipacion = models.CharField(max_length=50)
+    estadoParticipacion = models.BooleanField(default=True)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
     def __str__(self) -> str:
@@ -79,8 +79,8 @@ class Equipo(models.Model):
 class Alianza(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
-    estado = models.BooleanField()
-    listaEquipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    estado = models.BooleanField(default=False)
+    Equipos = models.ForeignKey(Equipo, on_delete=models.CASCADE)
 
     def formaralianza(self, nueva_alianza):
         self.nombre = nueva_alianza
