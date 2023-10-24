@@ -1,9 +1,28 @@
+{% load static %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="text" name="username" id="" placeholder="Nombre de Usuario">
-    <br>
-    <input type="text" name="password" id="" placeholder="Contrasenia">
-    <br>
-    <button type="submit">Iniciar Sesion</button>
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="{% static 'js/login.js' %}"></script>
+    <title>The challenge island</title>
+</head>
+<body>
+    <form action="" method="post" class="tarjeta">
+        {% csrf_token %}
+        <div class="username" id="div-username">
+            <input type="text" name="username" id="input-username" placeholder="Nombre de Usuario">
+        </div>
+        <div class="password" id="div-password">
+            <input type="password" name="password" id="input-password" placeholder="Contrasenia">
+            <span class="material-symbols-outlined" id="span-eye">
+                visibility_off
+            </span>
+        </div>
+        <a href="">Registrarme</a>
+        <label for="" id="label_avisos">La Contrasenia o el usuario son incorrectos</label>
+        <button type="submit">Iniciar Sesion</button>
+    </form>
+</body>
+

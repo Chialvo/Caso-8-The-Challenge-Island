@@ -6,9 +6,11 @@
     --color-4: #a9cd5b;
     --color-5: #d9d986;
 }
-
+body{
+    display: block;
+}
 header{
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
     background-image: url("../img/Fondo_home.svg");
     background-size: cover;
@@ -20,6 +22,7 @@ header{
 }
 
 .home-header-textos{
+    margin-top: 200px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -36,6 +39,7 @@ header{
 }
 
 .home-inicio_sesion{
+    margin-top: 100px;
     background-color: var(--color-3);
     color: var(--color-2);
     border: 3px solid var(--color-3);
@@ -76,7 +80,7 @@ main{
     height: 45vh;
     width: 45vh;
     border-radius: 50%;
-    border: #a9cd5b solid 5px;
+    border: #a9cd5b solid 10px;
 }
 
 .home-descripcion{
