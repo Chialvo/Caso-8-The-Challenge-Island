@@ -28,25 +28,13 @@ class Participante(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     apodo = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=500)
+    descripcion = models.CharField(max_length=1000)
     estadoParticipacion = models.BooleanField(default=True)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
+    
     def __str__(self) -> str:
         return f"{self.nombre}"
-
-    def agregarParticipante(self, nombre, descripcion, apellido, pais, habilidad, apodo, estadoParticipacion):
-        nuevo_participante = Participante(
-            nombre=nombre,
-            descripcion=descripcion,
-            apellido=apellido,
-            pais=pais,
-            habilidad=habilidad,
-            apodo=apodo,
-            estadoParticipacion=estadoParticipacion
-        )
-        nuevo_participante.save()
-        return nuevo_participante
 
     def eliminarParticipante(self):
         self.delete()
@@ -81,6 +69,9 @@ class Alianza(models.Model):
     descripcion = models.CharField(max_length=100)
     estado = models.BooleanField(default=False)
     Equipos = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.nombre}"
 
     def formaralianza(self, nueva_alianza):
         self.nombre = nueva_alianza
@@ -123,21 +114,6 @@ class Temporada(models.Model):
 
     def __str__(self):
         return f'"{self.nombre}" temporada numero {self.numero}' 
-    
-    def conocerEquipos(self):
-        pass
-    
-    def conocerAlianzas(self):
-        pass
-    
-    def conocerDesafios(self):
-        pass
-    
-    def conocerDetallesDesafios(self):
-        pass
-    
-    def conocerRondasEliminacion(self):
-        pass
     
     def listaEquipos(self):
         pass
