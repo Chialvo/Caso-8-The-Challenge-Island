@@ -3,13 +3,27 @@ from .models import *
 from TCI.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
+from django.db.models import Q
 # Create your views here.
 def prueba(request):
     return render(request, "index.html")
 
 
 def home(request):
+    temporadas = Temporada.objects.all()
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        try:
+            temporada_relacionada = temporadas.filter(
+                Q(nombre__icontains=busqueda) |
+                Q(numero=busqueda) |
+                Q(puntos=busqueda)).distinct()
+        except ValueError:
+            temporada_relacionada = temporadas.filter(
+                Q(nombre__icontains=busqueda)).distinct()
+        temporada_no_relacionadas = temporadas.exclude(id__in=temporada_relacionada.values_list('id', flat=True))
+        temporadas = list(temporada_relacionada) + list(temporada_no_relacionadas)
+        return render(request, 'temporadas.html', {'temporadas': temporadas})
     return render(request, "home.html")
 
 def login(request):
@@ -41,6 +55,17 @@ def equipos(request):
 @login_required
 def participantes(request):
     participantes = Participante.objects.all()
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        participante_relacionado = participantes.filter(
+            Q(nombre__icontains=busqueda) |
+            Q(apellido__icontains=busqueda) |
+            Q(apodo__icontains=busqueda) |
+            Q(pais__nombre__icontains=busqueda) |
+            Q()).distinct()
+        participantes_no_relacionado = participantes.exclude(id__in=participante_relacionado.values_list('id', flat=True))
+        participantes = list(participante_relacionado) + list(participantes_no_relacionado)
+        return render(request, 'participantes.html', {'participantes': participantes})
     return render(request, "participantes.html", {'participantes': participantes})
 
 @login_required
