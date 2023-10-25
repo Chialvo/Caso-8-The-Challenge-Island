@@ -31,6 +31,7 @@ def lista_equipos(request):
 @login_required
 def temporadas(request):
     temporadas = Temporada.objects.all()
+    print(temporadas)
     return render(request, "temporadas.html", {'temporadas': temporadas})
 
 @login_required
