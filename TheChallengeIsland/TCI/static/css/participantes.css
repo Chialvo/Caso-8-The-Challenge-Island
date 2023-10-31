@@ -25,7 +25,14 @@
     height: 10vw;
     border-radius: 50%;
     border: 5px green solid;
+    transition: all .3s;
+    cursor: pointer;
 
+}
+
+.participante-tarjeta-contenedor:hover{
+    scale: 1.1;
+    transition: all .3s;
 }
 .participante-tarjeta h2{
     font-size: larger;

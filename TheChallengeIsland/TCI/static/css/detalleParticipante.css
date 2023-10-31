@@ -1,6 +1,98 @@
+
+:root {
+    --color-1: #1a1b06;
+    --color-2: #209e60;
+    --color-3: #214a32;
+    --color-4: #a9cd5b;
+    --color-5: #d9d986;
+}
 main{
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 200px;
+    margin-top: 200px;
+}
 
-    background-color: brown;
+
+h1{
+    font-size: 40px;
+    color: var(--color-2);
+    
+}
+
+h2{
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bolder;
+    color: var(--color-2);
+}
+
+p{  
+    padding: 30px;
+    font-size: 20px;
+    white-space: pre-line;
+    flex: 1 1 0;
+    text-align: center;
+}
+
+img{
+    border: 5px green solid;
+    width: 20vw;
+    height: 30vw;
+}
+
+.participante-descripcion{
+    background-color: var(--color-5);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 60%;
+}
+
+.participante-detalles{
+    width: 60%;
+    height: 5vh;
+    background-color: var(--color-4);
+    color: var(--color-3);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.participante-detalles h3{
+    font-size: smaller;
+    margin: 0;
+
+}
+
+.participante-listas{
+    background-color: var(--color-5);
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+}
+
+.lista-equipos{
+    width: 50%;
+    border: #1a1b06 solid 3px;
+    padding: 20px 0;
+}
+
+.lista-equipos h4{
+    font-size: medium;
+    padding-left: 20px;
+}
+
+.lista-temporadas{
+    width: 50%;
+    border: #1a1b06 solid 3px;
+    padding: 20px 0;
+}
+
+.lista-temporadas h4{
+    font-size: medium;
+    padding-left: 20px;
 }
