@@ -106,7 +106,6 @@ class RondaEliminacion(models.Model):
 class Temporada(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.IntegerField()
-    puntos = models.OneToOneField(Detalle_desafio, to_field="puntos", null=True, related_name="temporada_puntos", on_delete=models.CASCADE)
     listaEquipo = models.ManyToManyField("Equipo")
     listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
     listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
