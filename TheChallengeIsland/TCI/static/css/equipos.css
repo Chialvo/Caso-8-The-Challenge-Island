@@ -23,7 +23,12 @@
     height: 15vw;
     border-radius: 50%;
     border: 5px green solid;
-
+    cursor: pointer;
+    transition: all .3s;
+}
+.equipo-tarjeta-contenedor:hover{
+    transform: scale(1.1);
+    transition: all .3s;
 }
 .equipo-tarjeta h2{
     font-size: larger;

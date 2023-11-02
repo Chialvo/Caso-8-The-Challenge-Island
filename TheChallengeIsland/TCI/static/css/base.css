@@ -81,6 +81,7 @@ nav{
     justify-content: center;
     margin-right: -50px;
     transition: all 0.3s;
+    
 }
 
 .nav-agrupador input{
@@ -139,7 +140,7 @@ nav{
 
 .nav-agrupador-boton:hover span{
     color: var(--color-2);
-    transition: all 0.3s;
+    transition: all 0.35s;
 }
 
 .nav-agrupador span{

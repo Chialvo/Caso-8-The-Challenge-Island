@@ -10,7 +10,7 @@
     {% for equipo in equipos %}
     <div class="equipo-tarjeta">
         
-        <div class="equipo-tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></div>
+        <a href="{% url 'equipo' equipo.pk %}" class="equipo-tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></a>
         <h2>{{ equipo.nombre }}</h2>  
         <div class="equipo-tarjeta-descripcion">
             {{ equipo.ganador}}

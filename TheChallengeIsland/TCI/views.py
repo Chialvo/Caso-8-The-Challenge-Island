@@ -73,9 +73,31 @@ def temporada(request):
     return render(request, "detallesTemporada.html")
 
 @login_required
-def equipo(request):
-    return render(request, "detallesEquipo.html")
+def equipo(request, pk):
+    equipo = Equipo.objects.get(pk=pk)
+    nombre = equipo.nombre
+    return render(request, "detallesEquipo.html",{
+        'nombre': nombre,
+    })
 
-@login_required
-def participante(request):
-    return render(request, "detallesParticipante.html")
+def participante(request, pk):
+
+    participante = Participante.objects.get(pk=pk)
+    nombre = participante.nombre
+    apellido = participante.apellido
+    apodo = participante.apodo
+    descripcion = participante.descripcion
+    estado = participante.estadoParticipacion
+    pais = participante.pais
+    habilidad =  participante.habilidad
+
+    return render(request, "detallesParticipante.html", {
+        'participante': participante,
+        'nombre': nombre,
+        'apellido': apellido,
+        'apodo': apodo,
+        'descripcion': descripcion,
+        'estado': estado,
+        'pais': pais,
+        'habilidad': habilidad
+    })
