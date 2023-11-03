@@ -68,7 +68,7 @@ class Alianza(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
     estado = models.BooleanField(default=False)
-    Equipos = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    Equipos = models.ManyToManyField('Equipo')
 
     def __str__(self) -> str:
         return f"{self.nombre}"
@@ -83,7 +83,7 @@ class Reglas(models.Model):
 class Desafio(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
-    equipos = models.ForeignKey(Equipo, on_delete=models.CASCADE)
+    equipos = models.ManyToManyField('Equipo')
     reglas = models.ForeignKey(Reglas, on_delete=models.CASCADE)
 
 class Detalle_desafio(models.Model):
@@ -97,8 +97,8 @@ class RondaEliminacion(models.Model):
     eliminado = models.ForeignKey(Equipo, on_delete=models.CASCADE)
     desafios = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
 
-    def __init__(self):
-        self.eliminado = None
+    def __str__(self):
+        return f'Ronda de eliminación ({self.fechaRondaEliminacion})'
 
     def eliminarEquipo(self, equipo):
         self.eliminado = equipo
