@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/participanteForm.css' %}">
+{% endblock %}
+{% block content %}
+<form class="tarjeta" method="post">
+    {% csrf_token %}
+    <input class="input-general" type="text" name="nombre" placeholder="Nombre" required><br>
+    <input class="input-general" type="text" name="apellido" placeholder="Apellido" required><br>
+    <input class="input-general" type="text" name="apodo" placeholder="Apodo" required><br>
+    <textarea class="textarea-general" name="descripcion" rows="4" placeholder="Descripción" required></textarea><br>
+    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" required><br>
+    <input class="input-general" type="text" name="habilidad" placeholder="Habilidad" required><br>
+    <select class="select-general" name="pais" required>
+        {% for pais in paises %}
+            <option value="{{pais}}">{{pais}}</option>
+        {% endfor %}
+    </select><br>
+    <button class="submit-general" type="submit">Guardar Participante</button>
+</form>
+{% endblock %}

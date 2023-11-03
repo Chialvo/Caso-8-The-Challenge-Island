@@ -8,6 +8,141 @@
     --color-5: #d9d986;
 }
 
+/*----------------------General----------------------*/
+
+/* Estilos generales para los elementos de entrada */
+.input-general {
+    border: var(--color-2) 4px solid;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    height: 60px;
+    padding-left: 10px;
+    color: var(--color-2);
+    width: 50%;
+}
+
+.input-general::placeholder {
+    color: var(--color-2);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: all .3s;
+}
+
+.input-general:hover::placeholder {
+    padding-left: 15px;
+    transition: all .3s;
+}
+
+.input-general:focus::placeholder {
+    padding-left: 50px;
+    color: var(--color-5);
+    transition: all .3s;
+}
+
+.input-general:focus {
+    outline: none;
+}
+
+/* Estilos para el textarea */
+.textarea-general {
+    border: var(--color-2) 4px solid;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    padding-left: 10px;
+    color: var(--color-2);
+    width: 50%;
+    resize: none; /* Evita que el usuario cambie el tamaño */
+}
+
+.textarea-general::placeholder {
+    color: var(--color-2);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: all .3s;
+}
+
+.textarea-general:hover::placeholder {
+    padding-left: 15px;
+    transition: all .3s;
+}
+
+.textarea-general:focus::placeholder {
+    padding-left: 50px;
+    color: var(--color-5);
+    transition: all .3s;
+}
+
+.textarea-general:focus {
+    outline: none;
+}
+
+/* Estilos para el select */
+.select-general {
+    border: var(--color-2) 4px solid;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    padding-left: 10px;
+    color: var(--color-2);
+    height: 60px;
+    width: 50%;
+}
+
+.select-general::placeholder {
+    color: var(--color-2);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: all .3s;
+}
+
+.select-general:hover::placeholder {
+    padding-left: 15px;
+    transition: all .3s;
+}
+
+.select-general:focus::placeholder {
+    padding-left: 50px;
+    color: var(--color-5);
+    transition: all .3s;
+}
+
+.select-general:focus {
+    outline: none;
+}
+
+/* Estilos para las opciones del select */
+.option-general {
+    border: var(--color-2) 4px solid;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    color: var(--color-2);
+    padding-left: 10px;
+    transition: all .3s;
+}
+
+.option-general:hover {
+    background-color: var(--color-3); /* Cambia el color en hover */
+    color: var(--color-5); /* Cambia el color del texto en hover */
+    padding-left: 15px;
+}
+
+/* Estilos para el botón submit-general */
+.submit-general {
+    border: var(--color-2) 4px solid;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    height: 60px;
+    width: 50%;
+    color: var(--color-2);
+}
+
+.submit-general:hover {
+    background-color: var(--color-3);
+    color: var(--color-5);
+}
+
+
+/*----------------------Fin general----------------------*/
+
 
 *{
     padding: 0;

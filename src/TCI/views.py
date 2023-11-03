@@ -4,10 +4,9 @@ from TCI.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.db.models import Q
-# Create your views here.
+
 def prueba(request):
     return render(request, "index.html")
-
 
 def home(request):
     temporadas = Temporada.objects.all()
@@ -31,7 +30,7 @@ def login(request):
 
 def exit(request):
     logout(request)
-    return render(request,'home.html')
+    return render(request, 'home.html')
 
 def lista_equipos(request):
     equipos = Equipo.objects.all()
@@ -40,8 +39,9 @@ def lista_equipos(request):
     for equipo in equipos:
         participantes = Participante.objects.filter(equipo=equipo)
         data.append({'equipo': equipo, 'participantes': participantes})
-        return render(request, 'pruebaequipos.html', {'data': data})
-    
+
+    return render(request, 'pruebaequipos.html', {'data': data})
+
 @login_required
 def temporadas(request):
     temporadas = Temporada.objects.all()
@@ -66,6 +66,7 @@ def participantes(request):
         participantes_no_relacionado = participantes.exclude(id__in=participante_relacionado.values_list('id', flat=True))
         participantes = list(participante_relacionado) + list(participantes_no_relacionado)
         return render(request, 'participantes.html', {'participantes': participantes})
+    
     return render(request, "participantes.html", {'participantes': participantes})
 
 @login_required
@@ -76,12 +77,9 @@ def temporada(request):
 def equipo(request, pk):
     equipo = Equipo.objects.get(pk=pk)
     nombre = equipo.nombre
-    return render(request, "detallesEquipo.html",{
-        'nombre': nombre,
-    })
+    return render(request, "detallesEquipo.html", {'nombre': nombre})
 
 def participante(request, pk):
-
     participante = Participante.objects.get(pk=pk)
     nombre = participante.nombre
     apellido = participante.apellido
@@ -89,7 +87,7 @@ def participante(request, pk):
     descripcion = participante.descripcion
     estado = participante.estadoParticipacion
     pais = participante.pais
-    habilidad =  participante.habilidad
+    habilidad = participante.habilidad
 
     return render(request, "detallesParticipante.html", {
         'participante': participante,
@@ -101,3 +99,30 @@ def participante(request, pk):
         'pais': pais,
         'habilidad': habilidad
     })
+
+@login_required
+def participanteForm(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        apellido = request.POST['apellido']
+        apodo = request.POST['apodo']
+        descripcion = request.POST['descripcion']
+        estado_participacion = bool(request.POST.get('estado_participacion', False))
+        pais_nombre = request.POST['pais']
+        pais = Pais.objects.filter(nombre=pais_nombre).first()
+        habilidad_id = request.POST['habilidad']
+
+        participante = Participante.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            apodo=apodo,
+            descripcion=descripcion,
+            estadoParticipacion=estado_participacion,
+            pais=pais,
+            habilidad_id=habilidad_id
+        )
+
+        return render(request, 'participante.html', {'participante': participante})
+
+    paises = Pais.objects.all()
+    return render(request, 'participanteForm.html', {'paises': paises})
