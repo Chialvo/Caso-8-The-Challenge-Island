@@ -56,3 +56,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll('.label-seleccion input[type="checkbox"]');
+    const labels = document.querySelectorAll('.label-seleccion');
+
+    checkboxes.forEach(function (checkbox, index) {
+        checkbox.addEventListener("change", function () {
+            if (checkbox.checked) {
+                labels[index].style.backgroundColor = 'var(--color-2)';
+                labels[index].style.color = 'var(--color-5)';
+            } else {
+                labels[index].style.backgroundColor = '';
+                labels[index].style.color = '';
+            }
+        });
+    });
+});

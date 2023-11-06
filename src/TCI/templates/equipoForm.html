@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/participanteForm.css' %}">
+{% endblock %}
+{% block content %}
+<form class="tarjeta" method="post">
+    {% csrf_token %}
+    <input class="input-general" type="text" name="nombre_equipo" required placeholder="Nombre del Equipo"><br>
+    <div class="lista-seleccion">
+        {% for participante in participantes %}
+            <label class="label-seleccion">
+                <input type="checkbox" name="seleccionados" value="{{ participante.id }}">
+                {{ participante.nombre }} {{ participante.apellido }}
+            </label><br>
+        {% endfor %}
+    </div>
+    <button class="submit-general" type="submit">Crear Equipo</button>
+</form>
+<script>
+
+</script>
+    
+{% endblock %}

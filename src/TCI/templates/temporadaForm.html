@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/participanteForm.css' %}">
+{% endblock %}
+{% block content %}
+<form class="tarjeta" method="post">
+        {% csrf_token %}
+        <input class="input-general" type="text" name="nombre" id="nombre" required placeholder="Nombre"><br>
+        <input class="input-general" type="number" name="numero" id="numero" required placeholder="Numero"><br>
+        <button class="submit-general" type="submit">Crear Temporada</button>
+</form>
+
+{% endblock %}
