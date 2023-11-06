@@ -111,6 +111,9 @@ def participanteForm(request):
         pais_nombre = request.POST['pais']
         pais = Pais.objects.filter(nombre=pais_nombre).first()
         habilidad_id = request.POST['habilidad']
+        if pais is None:
+            return render(request, 'error.html', {'message': 'País  no encontrado'})
+
 
         participante = Participante.objects.create(
             nombre=nombre,

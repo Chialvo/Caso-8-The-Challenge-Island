@@ -131,13 +131,15 @@
     border-radius: 15px;
     background-color: var(--color-5);
     height: 60px;
-    width: 50%;
+    width: 50%; /* Ancho del 50% */
     color: var(--color-2);
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .submit-general:hover {
-    background-color: var(--color-3);
-    color: var(--color-5);
+    background-color: var(--color-2); /* Cambia el color de fondo en hover a var(--color-2) */
+    transform: scale(1.05); /* Escala el botón a 1.5 veces en hover */
+    color: var(--color-5); /* Cambia el color del texto en hover a var(--color-5) */
 }
 
 
