@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import *
 from TCI.models import *
 from django.contrib.auth.decorators import login_required
@@ -99,33 +99,47 @@ def participante(request, pk):
         'pais': pais,
         'habilidad': habilidad
     })
+from django.shortcuts import render, redirect
+from .models import Participante, Pais, Habilidad
+from django.http import HttpResponse
 
 @login_required
 def participanteForm(request):
     if request.method == 'POST':
-        nombre = request.POST['nombre']
-        apellido = request.POST['apellido']
-        apodo = request.POST['apodo']
-        descripcion = request.POST['descripcion']
-        estado_participacion = bool(request.POST.get('estado_participacion', False))
-        pais_nombre = request.POST['pais']
-        pais = Pais.objects.filter(nombre=pais_nombre).first()
-        habilidad_id = request.POST['habilidad']
-        if pais is None:
-            return render(request, 'error.html', {'message': 'País  no encontrado'})
+        # Procesa los datos del formulario POST
+        nombre = request.POST.get('nombre')
+        apellido = request.POST.get('apellido')
+        apodo = request.POST.get('apodo')
+        descripcion = request.POST.get('descripcion')
+        estado_participacion = request.POST.get('estado_participacion')
+        habilidad_id = request.POST.get('habilidad')
+        pais_id = request.POST.get('pais')
+        paises = Pais.objects.all()
 
+        for i in paises:
+            if i.nombre == pais_id:
+                pais= i
+                break
+        else:
+            return HttpResponse('País no encontrado. Por favor, verifica tu selección.')
 
-        participante = Participante.objects.create(
+        try:
+            habilidad = Habilidad.objects.get(pk=habilidad_id)
+        except Habilidad.DoesNotExist:
+            return HttpResponse('Habilidad no encontrada. Por favor, verifica tu selección.')
+
+        participante = Participante(
             nombre=nombre,
             apellido=apellido,
             apodo=apodo,
             descripcion=descripcion,
             estadoParticipacion=estado_participacion,
-            pais=pais,
-            habilidad_id=habilidad_id
+            habilidad=habilidad,
+            pais=pais
         )
-
-        return render(request, 'participante.html', {'participante': participante})
-
+        participante.save()
+        
+        return redirect('participante', pk=participante.pk)
+    
     paises = Pais.objects.all()
     return render(request, 'participanteForm.html', {'paises': paises})
