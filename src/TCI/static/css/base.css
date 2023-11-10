@@ -208,6 +208,7 @@ html {
     min-height: 100%;
 }
 nav{
+
     margin: 1vw .5vw;
     background-color: var(--color-3);
     width: 98vw;
@@ -244,6 +245,9 @@ nav{
 
 
 .nav-contenedor{
+    background-image: url('../img/TCI1.png'); /* Reemplaza 'ruta/de/la/imagen.jpg' con la ruta real de tu imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir completamente el área del botón */
+    background-position: center;
     width: 100px;
     border: 5px var(--color-4) solid;
     height: 100px;
