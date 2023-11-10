@@ -5,9 +5,12 @@
 {% endblock %}
 {% block content %}
     <main>
-        <a class="boton-admin" href="{% url form %}">Crear {{ aux }}</a>
-        <a class="boton-admin" href="{% url 'modificacionAdmin' num %}">Modificar {{ aux }}</a>
-        <a class="boton-admin" href="{% url 'home' %}">Borrar {{ aux }}</a>
+        <select class="select-admin" name="" id="">
+            {% for i in lista %}
+                <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
         <a class="boton-volver" href="{% url 'homeAdmin' %}">Volver</a>
+        <a class="boton-volver" href="{% url 'home' %}">Editar</a>
     </main>
 {% endblock %}
