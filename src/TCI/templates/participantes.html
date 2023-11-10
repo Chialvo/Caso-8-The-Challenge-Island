@@ -10,7 +10,7 @@
     {% for participante in participantes %}
     <div class="participante-tarjeta">
         
-        <a href="{% url 'participante' participante.pk %}" class="participante-tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></a>
+        <a href="{% url 'participante' participante.pk %}" class="participante-tarjeta-contenedor"><img src="{{ participante.foto }}" alt=""></a>
         <h2>{{ participante.nombre }}</h2> 
         <h3>"{{ participante.apodo }}"</h3> 
         <div class="participante-tarjeta-descripcion">
