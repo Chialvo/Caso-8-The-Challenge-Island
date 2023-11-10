@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 class Habilidad(models.Model):
     nombre = models.CharField(max_length=50)
@@ -32,7 +33,8 @@ class Participante(models.Model):
     estadoParticipacion = models.BooleanField(default=True)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
-    
+    foto = models.ImageField(upload_to='imagenes/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
+
     def __str__(self) -> str:
         return f"{self.nombre}"
 
@@ -60,6 +62,7 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     participantes = models.ManyToManyField('Participante')
     alianzas = models.ManyToManyField('Alianza')
+    foto = models.ImageField(upload_to='imagenes/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
@@ -112,6 +115,9 @@ class Temporada(models.Model):
     listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
     listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
     listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True, blank=True)
+    foto = models.ImageField(upload_to='imagenes/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
+    
+    
 
     def __str__(self):
         return f'"{self.nombre}" temporada numero {self.numero}' 
