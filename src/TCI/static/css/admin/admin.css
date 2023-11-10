@@ -50,6 +50,7 @@ main{
 }
 
 .select-admin {
+    text-align: center;
     width: 50%;
     border-radius: 15px;
     padding: 15px 0;
