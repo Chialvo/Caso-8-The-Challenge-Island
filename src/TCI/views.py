@@ -308,32 +308,32 @@ def modificarForm(request, num):
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(Pais, pk=seleccion_pk)
         print(objeto_seleccionado)
-        return render(request, 'forms/paisForm.html', {'pk': pk})
+        return render(request, 'forms/paisForm.html')
     elif num == 5:
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(Alianza, pk=seleccion_pk)
         print(objeto_seleccionado)
-        return render(request, 'forms/alianzaForm.html', {'pk': pk})
+        return render(request, 'forms/alianzaForm.html')
     elif num == 6:
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(Habilidad, pk=seleccion_pk)
         print(objeto_seleccionado)
-        return render(request, 'forms/habilidadForm.html', {'pk': pk})
+        return render(request, 'forms/habilidadForm.html')
     elif num == 7:
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(Regla, pk=seleccion_pk)
         print(objeto_seleccionado)
-        return render(request, 'forms/reglaForm.html', {'pk': pk})
+        return render(request, 'forms/reglaForm.html')
     elif num == 8:
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(Desafio, pk=seleccion_pk)
         print(objeto_seleccionado)
-        return render(request, 'forms/desafioForm.html', {'pk': pk})
+        return render(request, 'forms/desafioForm.html')
     elif num == 9:
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(RondaEliminacion, pk=seleccion_pk)
         print(objeto_seleccionado)
-        return render(request, 'forms/rondaEliminacionForm.html', {'pk': pk})
+        return render(request, 'forms/rondaEliminacionForm.html')
     else:
         return HttpResponse("Error")
     
