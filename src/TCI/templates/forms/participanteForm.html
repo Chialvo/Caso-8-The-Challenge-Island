@@ -11,7 +11,7 @@
     <input class="input-general" type="text" name="apellido" placeholder="Apellido" value="{{ participante.apellido }}" required><br>
     <input class="input-general" type="text" name="apodo" placeholder="Apodo" value="{{ participante.apodo }}" required><br>
     <textarea class="textarea-general" name="descripcion" rows="4" placeholder="Descripción" required>{{ participante.descripcion }}</textarea><br>
-    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" value="{{ participante.estado_participacion }}" required><br>
+    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" value="{{ participante.estadoParticipacion }}" required><br>
     <select class="select-general" name="habilidad" required>
         {% for habilidad in habilidades %}
             <option value="{{ habilidad }}" {% if habilidad == participante.habilidad %}selected{% endif %}>{{ habilidad }}</option>
