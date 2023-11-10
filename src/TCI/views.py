@@ -74,7 +74,7 @@ def temporadaForm(request):
         
         return redirect('detalle_temporada', pk=temporada.pk)  # Asegúrate de definir 'detalle_temporada' en tus URLs
 
-    return render(request, 'temporadaForm.html')
+    return render(request, 'forms/temporadaForm.html')
 
 
 
@@ -115,7 +115,7 @@ def equipoForm(request):
         return redirect('equipo', pk=equipo.pk)
 
     participantes = Participante.objects.all()
-    return render(request, 'equipoForm.html', {"participantes": participantes})
+    return render(request, 'forms/equipoForm.html', {"participantes": participantes})
 
 
 
@@ -201,7 +201,7 @@ def participanteForm(request):
     
     paises = Pais.objects.all()
     habilidades = Habilidad.objects.all()
-    return render(request, 'participanteForm.html', {'paises': paises, 'habilidades': habilidades})
+    return render(request, 'forms/participanteForm.html', {'paises': paises, 'habilidades': habilidades})
 
 
 
@@ -210,17 +210,55 @@ def homeAdmin(request):
 
 
 def accionAdmin(request, num):
-    switch_dict = {
-        1: 'temporada',
-        2: 'equipo',
-        3: 'participante',
-        4: 'pais',
-        5: 'alianza',
-        6: 'habilidad',
-        7: 'regla',
-        8: 'desafio',
-        9: 'rondaEliminacion',
+    nombre_dict = {
+        1: 'Temporada',
+        2: 'Equipo',
+        3: 'Participante',
+        4: 'Pais',
+        5: 'Alianza',
+        6: 'Habilidad',
+        7: 'Regla',
+        8: 'Desafio',
+        9: 'Ronda Eliminacion',
     }
+    forms_dict = {
+        1: 'temporadaForm',
+        2: 'equipoForm',
+        3: 'participanteForm',
+        4: 'paisForm',
+        5: 'alianzaForm',
+        6: 'habilidadForm',
+        7: 'reglaForm',
+        8: 'desafioForm',
+        9: 'rondaEliminacionForm',
 
-    aux = switch_dict.get(num)
-    return render(request, "admin/accionAdmin.html", {"aux": aux})
+    }
+    aux = nombre_dict.get(num)
+    form = forms_dict.get(num)
+
+    return render(request, "admin/accionAdmin.html", {"aux": aux, 'num': num, 'form': form})
+
+
+def modificacionAdmin(request, num):
+    lista =None
+    if num == 1:
+        lista = Temporada.objects.all()
+    elif num == 2:
+        lista =  Equipo.objects.all()
+    elif num == 3:
+        lista =  Participante.objects.all()
+    elif num == 4:
+        lista =  Pais.objects.all()
+    elif num == 5:
+        lista =  Alianza.objects.all()
+    elif num == 6:
+        lista =  Habilidad.objects.all()
+    elif num == 7:
+        lista =  Regla.objects.all()
+    elif num == 8:
+        lista =  Desafio.objects.all()
+    elif num == 9:
+        lista =  RondaEliminacion.objects.all()
+    else:
+        return HttpResponse("Error")
+    return render(request, "admin/modificacion.html", {"num": num, 'lista': lista})

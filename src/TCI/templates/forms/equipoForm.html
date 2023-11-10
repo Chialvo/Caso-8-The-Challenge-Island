@@ -2,6 +2,7 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/participanteForm.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin/admin.css' %}">
 {% endblock %}
 {% block content %}
 <form class="tarjeta" method="post">
@@ -16,6 +17,7 @@
         {% endfor %}
     </div>
     <button class="submit-general" type="submit">Crear Equipo</button>
+    <a class="boton-volver" href="{% url 'accionAdmin' num=2 %}">Volver</a>
 </form>
 <script>
 
