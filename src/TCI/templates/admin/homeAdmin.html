@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/admin/admin.css' %}">
+{% endblock %}
+{% block content %}
+    <main>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=1 %}">Temporada</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=2 %}">Equipo</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=3 %}">Participante</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=4 %}">Pais</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=5 %}">Alianza</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=6 %}">Habilidad</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=7 %}">Reglas</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=8 %}">Desafios</a>
+        <a class="boton-admin" href="{% url 'accionAdmin' num=9 %}">Ronda de eliminacion</a>
+    </main>
+{% endblock %}

@@ -3,9 +3,11 @@ from . import views
 urlpatterns = [ 
     path("", views.home, name="home"), 
     path('login/', views.login, name='login'), 
-    path('prueba/', views.prueba, name='prueba'), 
     path('accounts/', include('django.contrib.auth.urls')), 
     path('logout/', exit, name='exit'),
+
+    path('homeAdmin/', views.homeAdmin, name='homeAdmin'),
+    path('accionAdmin/<int:num>/', views.accionAdmin, name='accionAdmin'),
 
     path('participantes/', views.participantes, name='participantes'),
     path('participante/<int:pk>/', views.participante, name='participante'), 

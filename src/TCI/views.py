@@ -40,10 +40,6 @@ def buscarParticipante(busqueda):
     resultado = list(participante_relacionado) + list(participantes_no_relacionado)
     return resultado
 
-
-def prueba(request):
-    return render(request, "index.html")
-
 def home(request):
     busqueda = request.GET.get('buscador')
     if busqueda:
@@ -84,13 +80,10 @@ def temporadaForm(request):
 
 
 
-
 @login_required
 def equipos(request):
     equipos = Equipo.objects.all()
     return render(request, "equipos.html", {'equipos': equipos})
-
-
 @login_required
 def equipo(request, pk):
     equipo = Equipo.objects.get(pk=pk)
@@ -99,8 +92,6 @@ def equipo(request, pk):
     print('---'*10      )
     print(listaParticipantes)
     return render(request, "detallesEquipo.html", {'nombre': nombre, 'listaParticipantes': listaParticipantes})
-
-
 @login_required
 def equipoForm(request):
     if request.method == 'POST':
@@ -128,6 +119,7 @@ def equipoForm(request):
 
 
 
+
 @login_required
 def participantes(request):
     busqueda = request.GET.get('buscador')
@@ -136,7 +128,6 @@ def participantes(request):
         return render(request, 'participantes.html', {'participantes': resultado})
     participantes = Participante.objects.all()
     return render(request, "participantes.html", {'participantes': participantes})
-
 @login_required
 def participante(request, pk):
     busqueda = request.GET.get('buscador')
@@ -162,7 +153,6 @@ def participante(request, pk):
         'pais': pais,
         'habilidad': habilidad
     })
-
 @login_required
 def participanteForm(request):
     busqueda = request.GET.get('buscador')
@@ -215,14 +205,22 @@ def participanteForm(request):
 
 
 
+def homeAdmin(request):
+    return render(request, "admin/homeAdmin.html")
 
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        
-        # Crea un nuevo equipo
-        equipo = Equipo(nombre=nombre)
-        equipo.save()
-        
-        return redirect('detalle_equipo', pk=equipo.pk)  # Asegúrate de definir 'detalle_equipo' en tus URLs
 
-    return render(request, 'equipoForm.html')
+def accionAdmin(request, num):
+    switch_dict = {
+        1: 'temporada',
+        2: 'equipo',
+        3: 'participante',
+        4: 'pais',
+        5: 'alianza',
+        6: 'habilidad',
+        7: 'regla',
+        8: 'desafio',
+        9: 'rondaEliminacion',
+    }
+
+    aux = switch_dict.get(num)
+    return render(request, "admin/accionAdmin.html", {"aux": aux})
