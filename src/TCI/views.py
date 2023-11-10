@@ -5,24 +5,50 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.db.models import Q
 
+
+def buscarTemporada( busqueda):
+    temporadas = Temporada.objects.all()
+    try:
+        temporada_relacionada = temporadas.filter(
+            Q(nombre__icontains=busqueda) |
+            Q(numero=busqueda) |
+            Q(puntos=busqueda)).distinct()
+    except ValueError:
+        temporada_relacionada = temporadas.filter(
+            Q(nombre__icontains=busqueda)).distinct()
+    temporada_no_relacionadas = temporadas.exclude(id__in=temporada_relacionada.values_list('id', flat=True))
+    resultado = list(temporada_relacionada) + list(temporada_no_relacionadas)
+    return resultado
+
+def buscarEquipo(busqueda):
+    equipos = Equipo.objects.all()
+    equipo_relacionado = equipos.filter(
+        Q(nombre__icontains=busqueda) | Q()).distinc()
+    equipo_no_relacionado = participantes.exclude(id__in=equipo_relacionado.values_list('id', flat=True))
+    resultado = list(equipo_relacionado) + list(equipo_no_relacionado)
+    return resultado
+
+def buscarParticipante(busqueda):
+    participantes = Participante.objects.all()
+    participante_relacionado = participantes.filter(
+        Q(nombre__icontains=busqueda) |
+        Q(apellido__icontains=busqueda) |
+        Q(apodo__icontains=busqueda) |
+        Q(pais__nombre__icontains=busqueda) |
+        Q()).distinct()
+    participantes_no_relacionado = participantes.exclude(id__in=participante_relacionado.values_list('id', flat=True))
+    resultado = list(participante_relacionado) + list(participantes_no_relacionado)
+    return resultado
+
+
 def prueba(request):
     return render(request, "index.html")
 
 def home(request):
-    temporadas = Temporada.objects.all()
     busqueda = request.GET.get('buscador')
     if busqueda:
-        try:
-            temporada_relacionada = temporadas.filter(
-                Q(nombre__icontains=busqueda) |
-                Q(numero=busqueda) |
-                Q(puntos=busqueda)).distinct()
-        except ValueError:
-            temporada_relacionada = temporadas.filter(
-                Q(nombre__icontains=busqueda)).distinct()
-        temporada_no_relacionadas = temporadas.exclude(id__in=temporada_relacionada.values_list('id', flat=True))
-        temporadas = list(temporada_relacionada) + list(temporada_no_relacionadas)
-        return render(request, 'temporadas.html', {'temporadas': temporadas})
+        resultado = buscarTemporada(request, busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     return render(request, "home.html")
 
 def login(request):
@@ -31,20 +57,6 @@ def login(request):
 def exit(request):
     logout(request)
     return render(request, 'home.html')
-
-def lista_equipos(request):
-    equipos = Equipo.objects.all()
-    data = []
-
-    for equipo in equipos:
-        participantes = Participante.objects.filter(equipo=equipo)
-        data.append({'equipo': equipo, 'participantes': participantes})
-
-    return render(request, 'pruebaequipos.html', {'data': data})
-
-
-
-
 
 
 @login_required
@@ -83,43 +95,54 @@ def equipos(request):
 def equipo(request, pk):
     equipo = Equipo.objects.get(pk=pk)
     nombre = equipo.nombre
-    return render(request, "detallesEquipo.html", {'nombre': nombre})
+    listaParticipantes = equipo.listarparticipantes()
+    print('---'*10      )
+    print(listaParticipantes)
+    return render(request, "detallesEquipo.html", {'nombre': nombre, 'listaParticipantes': listaParticipantes})
 
 
 @login_required
 def equipoForm(request):
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        equipo = Equipo(nombre=nombre)
+        nombre_equipo = request.POST.get('nombre_equipo')
+        seleccionados=None
+        seleccionados = request.POST.getlist('seleccionados')
+        print('-'*20)
+        participantes = Participante.objects.all()
+        for i in seleccionados:
+            for x in participantes:
+                if int(i)==x.pk:
+                    print(x.nombre)
+        print('-'*20)
+        equipo = Equipo(nombre=nombre_equipo)
         equipo.save()
-        
-        return redirect('detalle_equipo', pk=equipo.pk)  
+
+        for participante_id in seleccionados:
+            participante = Participante.objects.get(pk=participante_id)
+            equipo.participantes.add(participante)
+
+        return redirect('equipo', pk=equipo.pk)
+
     participantes = Participante.objects.all()
     return render(request, 'equipoForm.html', {"participantes": participantes})
 
 
 
-
-
-
 @login_required
 def participantes(request):
-    participantes = Participante.objects.all()
     busqueda = request.GET.get('buscador')
     if busqueda:
-        participante_relacionado = participantes.filter(
-            Q(nombre__icontains=busqueda) |
-            Q(apellido__icontains=busqueda) |
-            Q(apodo__icontains=busqueda) |
-            Q(pais__nombre__icontains=busqueda) |
-            Q()).distinct()
-        participantes_no_relacionado = participantes.exclude(id__in=participante_relacionado.values_list('id', flat=True))
-        participantes = list(participante_relacionado) + list(participantes_no_relacionado)
-        return render(request, 'participantes.html', {'participantes': participantes})
-    
+        resultado = buscarParticipante(busqueda)
+        return render(request, 'participantes.html', {'participantes': resultado})
+    participantes = Participante.objects.all()
     return render(request, "participantes.html", {'participantes': participantes})
+
 @login_required
 def participante(request, pk):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarParticipante(busqueda)
+        return render(request, 'participantes.html', {'participantes': resultado})
     participante = Participante.objects.get(pk=pk)
     nombre = participante.nombre
     apellido = participante.apellido
@@ -139,8 +162,13 @@ def participante(request, pk):
         'pais': pais,
         'habilidad': habilidad
     })
+
 @login_required
 def participanteForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarParticipante(busqueda)
+        return render(request, 'participantes.html', {'participantes': resultado})
     if request.method == 'POST':
         # Procesa los datos del formulario POST
         nombre = request.POST.get('nombre')

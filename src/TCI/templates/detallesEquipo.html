@@ -12,13 +12,15 @@
         <div class="listas-equipo">
             <div class="lista-participantes">
                 <h4>Listas de participantes</h4>
+                {% for i in listaParticipantes %}
                 <ul>
-                    <li><a href=""></a></li>
+                    <li><a href="{% url 'participante' i.pk %}">{{ i.nombre }} {{ i.apellido }}</a></li>
                 </ul>
+                {% endfor %}
             </div>
     
             <div class="lista-temporadas">
-                <h4>Listas de temporadas</h4>
+                <h4>Listas de alianzas</h4>
                 <ul>
                     <li><a href=""></a></li>
                 </ul>

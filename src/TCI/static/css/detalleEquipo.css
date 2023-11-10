@@ -20,9 +20,13 @@ h1{
     color: var(--color-3);
 }
 
+h4{
+    color: var(--color-3);
+}
+
 img{
-    width: 20vw;
-    height: 20vw;
+    min-width: 20vw;
+    min-height: 20vw;
     border-radius: 50%;
     border: var(--color-2) solid 10px;
 }
@@ -32,4 +36,24 @@ img{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-3);
+}
+
+a:hover{
+    text-decoration:dashed;
+    color: var(--color-4);
+}
+
+ul{
+    list-style-type: square;
+}
+
+li::marker {
+    color: var(--color-4); 
+    font-size:  large;
+    
 }
