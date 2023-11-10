@@ -43,9 +43,23 @@ class Participante(models.Model):
         self.estadoParticipacion = nuevo_estado
         self.save()
 
+class Alianza(models.Model):
+    nombre = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=100)
+    estado = models.BooleanField(default=False)
+    Equipos = models.ManyToManyField('Equipo')
+
+    def __str__(self) -> str:
+        return f"{self.nombre}"
+
+    def formaralianza(self, nueva_alianza):
+        self.nombre = nueva_alianza
+
+
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     participantes = models.ManyToManyField('Participante')
+    alianzas = models.ManyToManyField('Alianza')
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
@@ -64,19 +78,7 @@ class Equipo(models.Model):
     def __str__(self):
         return self.nombre
 
-class Alianza(models.Model):
-    nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=100)
-    estado = models.BooleanField(default=False)
-    Equipos = models.ManyToManyField('Equipo')
-
-    def __str__(self) -> str:
-        return f"{self.nombre}"
-
-    def formaralianza(self, nueva_alianza):
-        self.nombre = nueva_alianza
-
-class Reglas(models.Model):
+class Regla(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=50)
 
@@ -84,7 +86,7 @@ class Desafio(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
     equipos = models.ManyToManyField('Equipo')
-    reglas = models.ForeignKey(Reglas, on_delete=models.CASCADE)
+    reglas = models.ForeignKey(Regla, on_delete=models.CASCADE)
 
 class Detalle_desafio(models.Model):
     puntos = models.IntegerField(unique=True, default=0)
