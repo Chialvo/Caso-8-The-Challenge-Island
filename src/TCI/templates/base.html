@@ -51,9 +51,13 @@
 
 <footer class="">
     <div class="footer-contenedor">
+        {% if user.is_superuser %}
+        <a class="footer-menu" href="{% url 'homeAdmin' %}">Admin</a>
+        {% else %}
         <a class="footer-menu" href="{% url 'home' %}">Menú</a>
+        {% endif %}
         <div class="footer-integrantes">
-            <h3>Lautaro Chialvo</h3>
+            <h3>Lautaro Chialvoo</h3>
             <h3>Alejo <i> Budi<s style="color: #214a32;">-</s></i>Vaquero</h3>
             <h3>Augusto Guchea Lezama</h3>
         </div>
