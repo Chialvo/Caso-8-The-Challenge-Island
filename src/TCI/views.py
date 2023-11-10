@@ -50,9 +50,9 @@ def home(request):
 def login(request):
     return render(request, "login.html")
 
-def exit(request):
+def exit_tci(request):
     logout(request)
-    return render(request, 'home.html')
+    return redirect('home')
 
 
 @login_required
