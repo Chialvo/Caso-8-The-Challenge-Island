@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import *
 from TCI.models import *
 from django.contrib.auth.decorators import login_required
@@ -263,24 +263,61 @@ def modificacionAdmin(request, num):
         return HttpResponse("Error")
     return render(request, "admin/modificacion.html", {"num": num, 'lista': lista})
 
-def modificarForm(request, num, pk):
+def modificarForm(request, num):
     if num == 1:
-        return render(request, 'forms/temporadaForm.html', {'pk': pk})
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Temporada, pk=seleccion_pk)
+        print(objeto_seleccionado)
+        return render(request, 'forms/temporadaForm.html')
     elif num == 2:
-        return render(request, 'forms/equipoForm.html', {'pk': pk})
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Equipo, pk=seleccion_pk)
+        print(objeto_seleccionado)
+        return render(request, 'forms/equipoForm.html')
     elif num == 3:
-        return render(request, 'forms/participanteForm.html', {'pk': pk})
+        seleccion_pk = request.GET.get('seleccion')
+        participante = get_object_or_404(Participante, pk=seleccion_pk)
+        print(participante)
+        if request.method == 'POST':
+            participante.nombre = request.POST.get('nombre')
+            participante.apellido = request.POST.get('apellido')
+            participante.apodo = request.POST.get('apodo')
+            participante.descripcion = request.POST.get('descripcion')
+            participante.estado_participacion = request.POST.get('estado_participacion')
+            participante.habilidad = request.POST.get('habilidad')
+            participante.pais = request.POST.get('pais')
+            participante.save()
+        return render(request, 'forms/participanteForm.html', {'participante': participante})
     elif num == 4:
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Pais, pk=seleccion_pk)
+        print(objeto_seleccionado)
         return render(request, 'forms/paisForm.html', {'pk': pk})
     elif num == 5:
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Alianza, pk=seleccion_pk)
+        print(objeto_seleccionado)
         return render(request, 'forms/alianzaForm.html', {'pk': pk})
     elif num == 6:
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Habilidad, pk=seleccion_pk)
+        print(objeto_seleccionado)
         return render(request, 'forms/habilidadForm.html', {'pk': pk})
     elif num == 7:
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Regla, pk=seleccion_pk)
+        print(objeto_seleccionado)
         return render(request, 'forms/reglaForm.html', {'pk': pk})
     elif num == 8:
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(Desafio, pk=seleccion_pk)
+        print(objeto_seleccionado)
         return render(request, 'forms/desafioForm.html', {'pk': pk})
     elif num == 9:
+        seleccion_pk = request.GET.get('seleccion')
+        objeto_seleccionado = get_object_or_404(RondaEliminacion, pk=seleccion_pk)
+        print(objeto_seleccionado)
         return render(request, 'forms/rondaEliminacionForm.html', {'pk': pk})
     else:
         return HttpResponse("Error")
+    

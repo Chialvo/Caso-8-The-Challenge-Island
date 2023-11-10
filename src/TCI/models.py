@@ -30,7 +30,7 @@ class Participante(models.Model):
     apellido = models.CharField(max_length=50)
     apodo = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=1000)
-    estadoParticipacion = models.BooleanField(default=True)
+    estadoParticipacion = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
     foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile.jpg')
