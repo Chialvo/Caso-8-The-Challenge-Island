@@ -7,22 +7,23 @@
 {% block content %}
 <form class="tarjeta" method="post">
     {% csrf_token %}
-    <input class="input-general" type="text" name="nombre" placeholder="Nombre" required><br>
-    <input class="input-general" type="text" name="apellido" placeholder="Apellido" required><br>
-    <input class="input-general" type="text" name="apodo" placeholder="Apodo" required><br>
-    <textarea class="textarea-general" name="descripcion" rows="4" placeholder="Descripción" required></textarea><br>
-    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" required><br>
+    <input class="input-general" type="text" name="nombre" placeholder="Nombre" value="{{ participante.nombre }}" required><br>
+    <input class="input-general" type="text" name="apellido" placeholder="Apellido" value="{{ participante.apellido }}" required><br>
+    <input class="input-general" type="text" name="apodo" placeholder="Apodo" value="{{ participante.apodo }}" required><br>
+    <textarea class="textarea-general" name="descripcion" rows="4" placeholder="Descripción" required>{{ participante.descripcion }}</textarea><br>
+    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" value="{{ participante.estado_participacion }}" required><br>
     <select class="select-general" name="habilidad" required>
         {% for habilidad in habilidades %}
-            <option value="{{habilidad}}">{{habilidad}}</option>
+            <option value="{{ habilidad }}" {% if habilidad == participante.habilidad %}selected{% endif %}>{{ habilidad }}</option>
         {% endfor %}
     </select><br>
     <select class="select-general" name="pais" required>
         {% for pais in paises %}
-            <option value="{{pais}}">{{pais}}</option>
+            <option value="{{ pais }}" {% if pais == participante.pais %}selected{% endif %}>{{ pais }}</option>
         {% endfor %}
     </select><br>
     <button class="submit-general" type="submit">Guardar Participante</button>
     <a class="boton-volver" href="{% url 'accionAdmin' num=3 %}">Volver</a>
 </form>
 {% endblock %}
+
