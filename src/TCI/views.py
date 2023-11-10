@@ -277,17 +277,33 @@ def modificarForm(request, num):
     elif num == 3:
         seleccion_pk = request.GET.get('seleccion')
         participante = get_object_or_404(Participante, pk=seleccion_pk)
-        print(participante)
+        paises = Pais.objects.all()
+        habilidades = Habilidad.objects.all()
+        
         if request.method == 'POST':
             participante.nombre = request.POST.get('nombre')
             participante.apellido = request.POST.get('apellido')
             participante.apodo = request.POST.get('apodo')
             participante.descripcion = request.POST.get('descripcion')
-            participante.estado_participacion = request.POST.get('estado_participacion')
-            participante.habilidad = request.POST.get('habilidad')
-            participante.pais = request.POST.get('pais')
+            participante.estadoParticipacion = request.POST.get('estado_participacion')
+            habilidad = request.POST.get('habilidad')
+            pais = request.POST.get('pais')
+            for i in habilidades:
+                if i.descripcion == habilidad:
+                    participante.habilidad = i
+                    break
+            else:
+                return HttpResponse('Habilidad no encontrada. Por favor, verifica tu selección.')
+
+            for p in paises:
+                if p.nombre == pais:
+                    participante.pais = p
+                    break
+            else:
+                return HttpResponse('País no encontrado. Por favor, verifica tu selección.')
             participante.save()
-        return render(request, 'forms/participanteForm.html', {'participante': participante})
+            return redirect('participante', pk=participante.pk)
+        return render(request, 'forms/participanteForm.html', {'participante': participante, 'paises': paises, 'habilidades': habilidades})
     elif num == 4:
         seleccion_pk = request.GET.get('seleccion')
         objeto_seleccionado = get_object_or_404(Pais, pk=seleccion_pk)
