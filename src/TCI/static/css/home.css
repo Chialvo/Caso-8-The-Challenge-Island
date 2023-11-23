@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&family=Anton&family=Italianno&family=Kanit&family=Merriweather+Sans&family=Sedgwick+Ave+Display&display=swap');
-:root {
-    --color-1: #1a1b06;
-    --color-2: #209e60;
-    --color-3: #214a32;
-    --color-4: #a9cd5b;
-    --color-5: #d9d986;
-}
+
 body{
     display: block;
 }
