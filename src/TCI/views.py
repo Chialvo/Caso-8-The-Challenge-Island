@@ -59,9 +59,11 @@ def exit_tci(request):
 def temporadas(request):
     temporadas = Temporada.objects.all()
     return render(request, "temporadas.html", {'temporadas': temporadas})
+
 @login_required
 def temporada(request):
     return render(request, "detallesTemporada.html")
+
 @login_required
 def temporadaForm(request):
     if request.method == 'POST':
@@ -76,14 +78,11 @@ def temporadaForm(request):
 
     return render(request, 'forms/temporadaForm.html')
 
-
-
-
-
 @login_required
 def equipos(request):
     equipos = Equipo.objects.all()
     return render(request, "equipos.html", {'equipos': equipos})
+
 @login_required
 def equipo(request, pk):
     equipo = Equipo.objects.get(pk=pk)
@@ -92,6 +91,7 @@ def equipo(request, pk):
     print('---'*10      )
     print(listaParticipantes)
     return render(request, "detallesEquipo.html", {'nombre': nombre, 'listaParticipantes': listaParticipantes})
+
 @login_required
 def equipoForm(request):
     if request.method == 'POST':
@@ -117,9 +117,6 @@ def equipoForm(request):
     participantes = Participante.objects.all()
     return render(request, 'forms/equipoForm.html', {"participantes": participantes})
 
-
-
-
 @login_required
 def participantes(request):
     busqueda = request.GET.get('buscador')
@@ -128,6 +125,7 @@ def participantes(request):
         return render(request, 'participantes.html', {'participantes': resultado})
     participantes = Participante.objects.all()
     return render(request, "participantes.html", {'participantes': participantes})
+
 @login_required
 def participante(request, pk):
     busqueda = request.GET.get('buscador')
