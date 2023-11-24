@@ -217,7 +217,6 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    z-index: 1000000000000;
 }
 
 

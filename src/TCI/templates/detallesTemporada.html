@@ -6,33 +6,7 @@
 
 {% block content %}
 <main>
-    <div class="contenedor-imagen">
-        <img src="" alt="">
-    </div>
 
-    <section>
-        {% for equipo in equipos %}
-            <a href="{% url 'equipo' equipo.pk %}" class="contenedor-equipo">
-                <img src="{% static equipo.foto %}" alt="">
-            </a>
-        {% endfor %}
-    </section>
-    <section>
-            <ul>
-                {% for participante in participantes %}
-                    <li>{{ participante.nombre }} {{ participante.apellido }}</li>
-                {% endfor %}
-            </ul>
-    </section>
-    <section>
-        <ul>
-            {% for ronda in rondas %}
-                <li>Fecha: {{ ronda.fechaRondaEliminacion }} 
-                    -Eliminado: {{ ronda.eliminado }} -
-                    Ronda de eliminacion: {{ ronda.desafio.nombre }}, {{ ronda.desafio.descripcion }}</li>
-            {% endfor %}
-        </ul>
-    </section>
 
 
 </main>

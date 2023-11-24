@@ -7,7 +7,7 @@
     <main>
         <a class="boton-admin" href="{% url form %}">Crear {{ aux }}</a>
         <a class="boton-admin" href="{% url 'modificacionAdmin' num %}">Modificar {{ aux }}</a>
-        <a class="boton-admin" href="{% url 'eliminacionAdmin' num %}">Borrar {{ aux }}</a>
+        <a class="boton-admin" href="{% url 'home' %}">Borrar {{ aux }}</a>
         <a class="boton-volver" href="{% url 'homeAdmin' %}">Volver</a>
     </main>
 {% endblock %}

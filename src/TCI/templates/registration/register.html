@@ -1,4 +1,6 @@
 {% load static %}
+{% if user.is_authenticated %}
+
 
 <head>
     <meta charset="UTF-8">
@@ -12,17 +14,27 @@
     <form action="" method="post" class="tarjeta">
         {% csrf_token %}
         <div class="username" id="div-username">
-            <input type="text" name="username" id="input-username" placeholder="Nombre de Usuario">
+            <input type="text" name="name" id="input-username" placeholder="Ingrese Nombre" required>
         </div>
+
+        <div class="username" id="div-username">
+            <input type="email" name="email" id="input-username" placeholder="Ingrese Mail" required>
+        </div>
+        
+        
         <div class="password" id="div-password">
-            <input type="password" name="password" id="input-password" placeholder="Contrasenia">
+            <input type="password" name="password" id="input-password" placeholder="Contraseña">
             <span class="material-symbols-outlined" id="span-eye">
                 visibility_off
             </span>
         </div>
         <a href="{% url "register" %}">Registrarme</a>
         <label for="" id="label_avisos">La Contrasenia o el usuario son incorrectos</label>
-        <button type="submit">Iniciar Sesion</button>
+        <button type="submit">Registrarme</button>
     </form>
 </body>
+
+{% else %}
+    <h1>Ya estas logueado</h1>
+{% endif %}
 

@@ -8,12 +8,12 @@
         <form class="form-modificar" method="get" action="{% url 'modificarForm' num %}">
             <select class="select-admin" name="seleccion" id="id_seleccion">
                 {% for i in lista %}
-                    <option value="{{ i.pk }}">{{ i.nombre }}</option>
+                    <option value="{{ i.pk }}">{{ i }}</option>
                 {% endfor %}
             </select>
             <button type="submit" class="boton-volver">Editar</button>
         </form>
-        <a class="boton-volver" href="{% url 'accionAdmin' num %}">Volver</a>
+        <a class="boton-volver" href="{% url 'modificarForm' num %}">Volver</a>
 
     </main>
 {% endblock %}

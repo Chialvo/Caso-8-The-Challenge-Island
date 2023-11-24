@@ -7,26 +7,17 @@
 {% block content %}
 <form class="tarjeta" method="post">
     {% csrf_token %}
-    <input type="text" name="nombre_equipo" value="{% if objeto_seleccionado %}{{ objeto_seleccionado.nombre }}{% endif %}" required class="input-general" placeholder="Nombre del Equipo"><br>
+    <input class="input-general" type="text" name="nombre_equipo" required placeholder="Nombre del Equipo"><br>
     <div class="lista-seleccion">
         {% for participante in participantes %}
             <label class="label-seleccion">
-                <input type="checkbox" name="seleccionadosp" value="{{ participante.pk }}">
+                <input type="checkbox" name="seleccionados" value="{{ participante.id }}">
                 {{ participante.nombre }} {{ participante.apellido }}
             </label><br>
         {% endfor %}
-
     </div>
-    <div class="lista-seleccion">
-        {% for alianza in alianzas %}
-        <label class="label-seleccion">
-            <input type="checkbox" name="seleccionadosa" value="{{ alianza.pk }}">
-            {{ alianza.nombre }} {{ alianza.apellido }}
-        </label><br>
-        {% endfor %}
-    </div>
-    <button type="submit" class="submit-general">Crear Equipo</button>
-    <a href="{% url 'accionAdmin' num=2 %}" class="boton-volver">Volver</a>
+    <button class="submit-general" type="submit">Crear Equipo</button>
+    <a class="boton-volver" href="{% url 'accionAdmin' num=2 %}">Volver</a>
 </form>
 <script>
 

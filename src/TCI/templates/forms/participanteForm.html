@@ -7,19 +7,19 @@
 {% block content %}
 <form class="tarjeta" method="post">
     {% csrf_token %}
-    <input class="input-general" type="text" name="nombre" placeholder="Nombre" value="{{ objeto_seleccionado.nombre }}" required><br>
-    <input class="input-general" type="text" name="apellido" placeholder="Apellido" value="{{ objeto_seleccionado.apellido }}" required><br>
-    <input class="input-general" type="text" name="apodo" placeholder="Apodo" value="{{ objeto_seleccionado.apodo }}" required><br>
-    <textarea class="textarea-general" name="descripcion" rows="4" placeholder="Descripción" required>{{ objeto_seleccionado.descripcion }}</textarea><br>
-    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" value="{{ objeto_seleccionado.estadoParticipacion }}" required><br>
+    <input class="input-general" type="text" name="nombre" placeholder="Nombre" value="{{ participante.nombre }}" required><br>
+    <input class="input-general" type="text" name="apellido" placeholder="Apellido" value="{{ participante.apellido }}" required><br>
+    <input class="input-general" type="text" name="apodo" placeholder="Apodo" value="{{ participante.apodo }}" required><br>
+    <textarea class="textarea-general" name="descripcion" rows="4" placeholder="Descripción" required>{{ participante.descripcion }}</textarea><br>
+    <input class="input-general" type="text" name="estado_participacion" placeholder="Estado de Participación" value="{{ participante.estadoParticipacion }}" required><br>
     <select class="select-general" name="habilidad" required>
         {% for habilidad in habilidades %}
-            <option value="{{ habilidad }}" {% if habilidad == objeto_seleccionado.habilidad %}selected{% endif %}>{{ habilidad }}</option>
+            <option value="{{ habilidad }}" {% if habilidad == participante.habilidad %}selected{% endif %}>{{ habilidad }}</option>
         {% endfor %}
     </select><br>
     <select class="select-general" name="pais" required>
         {% for pais in paises %}
-            <option value="{{ pais }}" {% if pais == objeto_seleccionado.pais %}selected{% endif %}>{{ pais }}</option>
+            <option value="{{ pais }}" {% if pais == participante.pais %}selected{% endif %}>{{ pais }}</option>
         {% endfor %}
     </select><br>
     <button class="submit-general" type="submit">Guardar Participante</button>

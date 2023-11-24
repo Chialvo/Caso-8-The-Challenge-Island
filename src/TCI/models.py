@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
-from itertools import chain
 
 class Habilidad(models.Model):
     nombre = models.CharField(max_length=50)
@@ -68,9 +67,6 @@ class Equipo(models.Model):
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
 
-    def listaralianza(self):
-        Alianzas = self.alianzas.all()
-        return Alianzas
     def listarparticipantes(self):
         Participantes = self.participantes.all()
         return Participantes 
@@ -93,7 +89,7 @@ class Desafio(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
     equipos = models.ManyToManyField('Equipo')
-    reglas = models.ManyToManyField("Regla")
+    reglas = models.ForeignKey(Regla, on_delete=models.CASCADE)
 
 class Detalle_desafio(models.Model):
     puntos = models.IntegerField(unique=True, default=0)
@@ -104,7 +100,7 @@ class Detalle_desafio(models.Model):
 class RondaEliminacion(models.Model):
     fechaRondaEliminacion = models.DateField()
     eliminado = models.ForeignKey(Equipo, on_delete=models.CASCADE)
-    desafio = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
+    desafios = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Ronda de eliminación ({self.fechaRondaEliminacion})'
@@ -116,51 +112,28 @@ class Temporada(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.IntegerField()
     listaEquipo = models.ManyToManyField("Equipo")
-    listaAlianzas = models.ManyToManyField(Alianza, blank=True)
+    listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
     listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
-    listaRondaEliminacion = models.ManyToManyField(RondaEliminacion, null=True, blank=True)
+    listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True, blank=True)
     foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile')
+    
+    
 
     def __str__(self):
-        return f'"{self.nombre}" temporada numero {self.numero}'
-    
-    def obtener_participantes(self):
-        equipos = self.listaEquipo.all()
-        alianzas = self.listaAlianzas.all()
-        participantes = list(equipos) + list(alianzas)
-        return participantes
-
-    def obtener_participantes_temporada(self):
-        equipos = self.listaEquipo.all()
-        participantes_por_equipo = [equipo.participantes.all() for equipo in equipos]
-        
-        # Flatten the list of querysets into a single list of participantes
-        participantes_temporada = list(chain.from_iterable(participantes_por_equipo))
-
-        return participantes_temporada
-    def conocerDesafios(self):
-        return self.listaDetalleDesafio.all()
+        return f'"{self.nombre}" temporada numero {self.numero}' 
     
     def listaEquipos(self):
-        equipos = self.listaEquipo.all()
-        return [equipo.nombre for equipo in equipos]
-
-    def listarAlianzas(self):
-        equipos = self.listaEquipo.all()
-        participantes_por_equipo = [equipo.alianzas.all() for equipo in equipos]
-        
-        # Flatten the list of querysets into a single list of participantes
-        participantes_temporada = list(chain.from_iterable(participantes_por_equipo))
-
-        return participantes_temporada
-
+        pass
+    
+    def listaAlianzas(self):
+        pass
+    
     def listaRondasELiminacion(self):
-        return self.listaRondaEliminacion.all()
-
+        pass
+    
     def listaDetalleDesafios(self):
         detalles = self.listaDetalleDesafio.all()
         return [detalle.nombre for detalle in detalles]
-    
     
     def enviarEquipos(self):
         pass

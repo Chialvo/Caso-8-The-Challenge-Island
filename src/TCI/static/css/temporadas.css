@@ -28,15 +28,9 @@
     height: 90%;
     border-radius: 40px ;
     border: 5px green solid;
-    transition: all .3s;
 }
 .tarjeta-contenedor img{
-    size-adjust: cover;
-    width: 100%;
-    height: 100%;
-    border-radius: 40px;
-    object-fit: cover;
-    object-position: center;
+    size-adjust: 100%;
 }
 
 .tarjeta-descripcion{
@@ -58,9 +52,4 @@
 .temporada-tarjeta h2{
     font-weight: bolder;
     font-size: xx-large;
-}
-
-.tarjeta-contenedor:hover{
-    scale: 1.05;
-    transition: all .3s;
 }

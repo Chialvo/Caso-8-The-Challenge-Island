@@ -9,9 +9,7 @@ urlpatterns = [
     path('homeAdmin/', views.homeAdmin, name='homeAdmin'),
     path('accionAdmin/<int:num>/', views.accionAdmin, name='accionAdmin'),
     path('modificacionAdmin/<int:num>/', views.modificacionAdmin, name='modificacionAdmin'),
-    path('eliminacionAdmin/<int:num>/', views.eliminacionAdmin, name='eliminacionAdmin'),
     path('modificarForm/<int:num>/', views.modificarForm, name='modificarForm'),
-    path('eliminarForm/<int:num>/', views.eliminarForm, name='eliminarForm'),
 
     path('participantes/', views.participantes, name='participantes'),
     path('participante/<int:pk>/', views.participante, name='participante'), 
@@ -25,13 +23,10 @@ urlpatterns = [
     #-----Formularios para crear-----#
     path('temporadaForm/', views.temporadaForm, name='temporadaForm'),
     path('equipoForm/', views.equipoForm, name='equipoForm'),
-    path('participanteForm/', views.participanteForm, name='participanteForm'),
-    path('paisForm/', views.paisForm, name='paisForm'),
-    path('habilidadForm/', views.habilidadForm, name='habilidadForm'),
-    path('reglaForm/', views.reglaForm, name='reglaForm'),
-    path('alianzaForm/', views.alianzaForm, name='alianzaForm'),
-    path('desafioForm/', views.desafioForm, name='desafioForm'),
-    path('rondaEliminacionForm/', views.rondaEliminacionForm, name='rondaEliminacionForm'),
+    path('participanteForm/', views.participanteForm, name='participanteForm'), 
+
+
+    #REGISTRO
+    path('register/', views.register_view, name='register'),
 
     ]
-

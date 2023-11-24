@@ -1,47 +1,6 @@
 main{
-    margin-top: 250px;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.contenedor-imagen{
-    width: 50%;
-    min-height: 50%;
-    border: 5px solid var(--color-2);
-    border-radius: 50px;
-}
-img{
-    size-adjust: cover;
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    object-fit: cover;
-    object-position: center;
-}
-section{
-    margin: 20px 0;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 5px solid var(--color-3);
-    background-color: var(--color-5);
-    display: flex;
-    justify-content: space-around;
-    padding: 15px;
-}
 
-section a {
-    border: 3px solid var(--color-2);
-    width: 50px;
-    height: 50px;
-    padding: 20px;
-    border-radius: 50%;
-}
-
-section a img {
-    border-radius: 50%;
+    background-color: blue;
 }
