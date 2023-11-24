@@ -31,7 +31,12 @@
     transition: all .3s;
 }
 .tarjeta-contenedor img{
-    size-adjust: 100%;
+    size-adjust: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .tarjeta-descripcion{

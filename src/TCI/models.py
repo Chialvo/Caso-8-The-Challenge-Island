@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from itertools import chain
 
 class Habilidad(models.Model):
     nombre = models.CharField(max_length=50)
@@ -67,6 +68,9 @@ class Equipo(models.Model):
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
 
+    def listaralianza(self):
+        Alianzas = self.alianzas.all()
+        return Alianzas
     def listarparticipantes(self):
         Participantes = self.participantes.all()
         return Participantes 
@@ -112,26 +116,51 @@ class Temporada(models.Model):
     nombre = models.CharField(max_length=100)
     numero = models.IntegerField()
     listaEquipo = models.ManyToManyField("Equipo")
-    listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
+    listaAlianzas = models.ManyToManyField(Alianza, blank=True)
     listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
     listaRondaEliminacion = models.ManyToManyField(RondaEliminacion, null=True, blank=True)
     foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile')
 
     def __str__(self):
         return f'"{self.nombre}" temporada numero {self.numero}'
+    
+    def obtener_participantes(self):
+        equipos = self.listaEquipo.all()
+        alianzas = self.listaAlianzas.all()
+        participantes = list(equipos) + list(alianzas)
+        return participantes
 
+    def obtener_participantes_temporada(self):
+        equipos = self.listaEquipo.all()
+        participantes_por_equipo = [equipo.participantes.all() for equipo in equipos]
+        
+        # Flatten the list of querysets into a single list of participantes
+        participantes_temporada = list(chain.from_iterable(participantes_por_equipo))
+
+        return participantes_temporada
+    def conocerDesafios(self):
+        return self.listaDetalleDesafio.all()
+    
     def listaEquipos(self):
-        pass
-    
-    def listaAlianzas(self):
-        pass
-    
+        equipos = self.listaEquipo.all()
+        return [equipo.nombre for equipo in equipos]
+
+    def listarAlianzas(self):
+        equipos = self.listaEquipo.all()
+        participantes_por_equipo = [equipo.alianzas.all() for equipo in equipos]
+        
+        # Flatten the list of querysets into a single list of participantes
+        participantes_temporada = list(chain.from_iterable(participantes_por_equipo))
+
+        return participantes_temporada
+
     def listaRondasELiminacion(self):
-        pass
-    
+        return self.listaRondaEliminacion.all()
+
     def listaDetalleDesafios(self):
         detalles = self.listaDetalleDesafio.all()
         return [detalle.nombre for detalle in detalles]
+    
     
     def enviarEquipos(self):
         pass

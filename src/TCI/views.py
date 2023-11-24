@@ -30,18 +30,18 @@ def temporadas(request):
 
 @login_required
 def temporada(request,pk):
-    temporada = Temporada.objects.get(pk=pk)
-    print(temporada.listarEquipos())
-    print(temporada.listarDetallesDesafios())
-    print(temporada.listaRondasELiminacion())
-    print(temporada.conocerDesafios())
-    print("________"*5)
-    return render(request, "detallesTemporada.html", {'temporada': temporada})
+    temporada = get_object_or_404(Temporada, pk=pk)
+    participantes = temporada.obtener_participantes_temporada()
+    participantes = list(set(participantes))
+    equipos = temporada.listaEquipo.all()
+    rondas = temporada.listaRondasELiminacion()
+
+    return render(request, "detallesTemporada.html", {'temporada': temporada, 'participantes':participantes, 'equipos':equipos, 'rondas':rondas})
 
 @login_required
 def equipos(request):
     equipos = Equipo.objects.all()
-    return render(request, "equipos.html", {'equipos': equipos})
+    return render(request, "equipos.html", {'equipos': equipos })
 
 @login_required
 def equipo(request, pk):
@@ -200,25 +200,27 @@ def modificarForm(request, num):
             objeto_seleccionado.save()
             return redirect("modificacionAdmin", num=1)
     elif num == 2:
+        equipo = None
         objeto_seleccionado = get_object_or_404(Equipo, pk=request.GET.get('seleccion'))
         template_name = 'forms/equipoForm.html'
         if request.method == 'POST':
             nombre_equipo = request.POST.get('nombre_equipo')
             objeto_seleccionado.nombre = nombre_equipo
-
+            seleccionadosp = request.POST.getlist('seleccionadosp')
+            seleccionadosa = request.POST.getlist('seleccionadosa')
             objeto_seleccionado.participantes.clear()
             objeto_seleccionado.alianzas.clear() 
+            
 
-            seleccionadosp = request.POST.getlist('seleccionadosp')
+            participantes = Participante.objects.all()
             for participante_id in seleccionadosp:
                 participante = Participante.objects.get(pk=participante_id)
                 objeto_seleccionado.participantes.add(participante)
 
-            seleccionadosa = request.POST.getlist('seleccionadosa')
+            alianzas = Alianza.objects.all()
             for alianza_id in seleccionadosa:
                 alianza = Alianza.objects.get(pk=alianza_id)
-                equipo.alianzas.add(alianza)
-            equipo = Equipo(nombre=nombre_equipo)
+                objeto_seleccionado.alianzas.add(alianza)
             objeto_seleccionado.save()
             return redirect("modificacionAdmin", num=2)
     elif num == 3:
@@ -382,56 +384,37 @@ def eliminarForm(request, num):
         return HttpResponse("Error")
     return redirect('accionAdmin', num=num)
     
-
 @login_required
 def temporadaForm(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         numero = request.POST.get('numero')
-        seleccionados=None
-        desafios = None
-        rondas = None
-        desafios = request.POST.getlist('desafios')
-        rondas = request.POST.getlist('rondasdeliminaciones')
         seleccionados = request.POST.getlist('seleccionados')
-        print(seleccionados)
+        rondas = request.POST.getlist('rondas')
+        print(rondas,"****"*5)
+        desafios = request.POST.getlist('desafios')
 
-        listaEquipo = Equipo.objects.all()
-        for i in seleccionados:
-            for x in listaEquipo:
-                if int(i)==x.pk:
-                    print(x.nombre)
-        listaE = []
-        for i in seleccionados:
-            equipo = get_object_or_404(Equipo, pk=i)
-            listaE.append(equipo)
-
-
-
-        listaRonda = RondaEliminacion.objects.all()
-        for i in rondas:
-            for x in listaRonda:
-                if int(i)==x.pk:
-                    print(x.nombre)
-        listaR = []
-        for i in rondas:
-            ronda = get_object_or_404(RondaEliminacion, pk=i)
-            listaR.append(ronda)
-
+        equipos_seleccionados = Equipo.objects.filter(pk__in=seleccionados)
+        rondas_seleccionadas = RondaEliminacion.objects.filter(pk__in=rondas)
+        desafios_seleccionados = Desafio.objects.filter(pk__in=desafios)
 
         temporada = Temporada(nombre=nombre, numero=numero)
         temporada.save()
-        temporada.listaEquipo.add(*listaE)
-        temporada.listaRondaEliminacion.add(*listaR)
+        temporada.listaEquipo.add(*equipos_seleccionados)
+        temporada.listaRondaEliminacion.add(*rondas_seleccionadas)
 
         return redirect('temporada', pk=temporada.pk) 
+
     equipos = Equipo.objects.all()
     desafios = Desafio.objects.all()
-    rondasdeliminaciones = RondaEliminacion.objects.all()
-    return render(request, 'forms/temporadaForm.html', {'equipos': equipos, 'desafios': desafios, 'rondaEliminaciones': rondasdeliminaciones})
+    rondas_deliminaciones = RondaEliminacion.objects.all()
+
+    return render(request, 'forms/temporadaForm.html', {'equipos': equipos, 'desafios': desafios, 'rondaEliminaciones': rondas_deliminaciones})
 
 @login_required
 def equipoForm(request):
+    equipo = None  # Inicializar equipo con None
+
     if request.method == 'POST':
         nombre_equipo = request.POST.get('nombre_equipo')
         seleccionadosp = request.POST.getlist('seleccionadosp')
@@ -445,11 +428,14 @@ def equipoForm(request):
             equipo.participantes.add(participante)
             print("*****")
             print(equipo.participantes)
+
         alianzas = Alianza.objects.all()
         for alianza_id in seleccionadosa:
             alianza = Alianza.objects.get(pk=alianza_id)
             equipo.alianzas.add(alianza)
+
         return redirect('equipo', pk=equipo.pk)
+
     alianzas = Alianza.objects.all()
     participantes = Participante.objects.all()
     return render(request, 'forms/equipoForm.html', {"participantes": participantes, "alianzas": alianzas})
@@ -547,27 +533,32 @@ def reglaForm(request):
         return redirect("accionAdmin", num=7)
     return render(request, 'forms/reglaForm.html')
 
+
 @login_required
 def desafioForm(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
-        desafio = Desafio(nombre=nombre, descripcion=descripcion)
-        seleccionados=None
-        seleccionados = request.POST.getlist('seleccionados')
-        reglas = Regla.objects.all()
-        for i in seleccionados:
-            for x in reglas:
-                if int(i)==x.pk:
-                    print(x.nombre)
 
-        for regla_id in seleccionados:
-            reglas = Regla.objects.get(pk=regla_id)
-            reglas.reglas.add(participante)
+        # Crear el objeto Desafio antes de agregar reglas
+        desafio = Desafio(nombre=nombre, descripcion=descripcion)
         desafio.save()
+
+        seleccionados = request.POST.getlist('seleccionados')
+        reglas = Regla.objects.filter(pk__in=seleccionados)
+        
+        for regla in reglas:
+            print(regla.nombre)
+
+        # Agregar las reglas al desafío
+        desafio.reglas.add(*reglas)
+        desafio.save()
+
         return redirect("accionAdmin", num=8)
+
     reglas = Regla.objects.all()
     return render(request, 'forms/desafioForm.html', {'reglas': reglas})
+
 
 @login_required
 def rondaEliminacionForm(request):
