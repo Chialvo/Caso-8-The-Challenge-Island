@@ -144,6 +144,33 @@ def modificacionAdmin(request, num):
         return HttpResponse("Error")
     print(lista)
     return render(request, "admin/modificacion.html", {"num": num, 'lista': lista})
+
+@login_required
+def eliminacionAdmin(request, num):
+    lista =None
+    if num == 1:
+        lista = Temporada.objects.all()
+    elif num == 2:
+        lista =  Equipo.objects.all()
+    elif num == 3:
+        lista =  Participante.objects.all()
+    elif num == 4:
+        lista =  Pais.objects.all()
+    elif num == 5:
+        lista =  Alianza.objects.all()
+    elif num == 6:
+        lista =  Habilidad.objects.all()
+    elif num == 7:
+        lista =  Regla.objects.all()
+    elif num == 8:
+        lista =  Desafio.objects.all()
+    elif num == 9:
+        lista =  RondaEliminacion.objects.all()
+    else:
+        return HttpResponse("Error")
+    print(lista)
+    return render(request, "admin/eliminacionAdmin.html", {"num": num, 'lista': lista})
+
 @login_required
 def modificarForm(request, num):
     objeto_seleccionado = None
@@ -317,6 +344,39 @@ def modificarForm(request, num):
 
     return render(request, template_name, {'objeto_seleccionado': objeto_seleccionado, 'equipos': equipos,"participantes": participantes, 'reglas': reglas, 'paises': paises, 'habilidades': habilidades, "alianzas": alianzas, "desafios": desafios, "rondaEliminaciones": rondaEliminaciones})
 
+@login_required
+def eliminarForm(request, num):
+    if num == 1:
+        objeto_seleccionado = get_object_or_404(Temporada, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 2:
+        objeto_seleccionado = get_object_or_404(Equipo, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 3:
+        objeto_seleccionado = get_object_or_404(Participante, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 4:
+        objeto_seleccionado = get_object_or_404(Pais, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 5:
+        objeto_seleccionado = get_object_or_404(Alianza, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 6:
+        objeto_seleccionado = get_object_or_404(Habilidad, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 7:
+        objeto_seleccionado = get_object_or_404(Regla, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 8:
+        objeto_seleccionado = get_object_or_404(Desafio, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    elif num == 9:
+        objeto_seleccionado = get_object_or_404(RondaEliminacion, pk=request.GET.get('seleccion'))
+        objeto_seleccionado.delete()
+    else:
+        return HttpResponse("Error")
+    return redirect('accionAdmin', num=num)
+    
 
 @login_required
 def temporadaForm(request):
@@ -324,24 +384,41 @@ def temporadaForm(request):
         nombre = request.POST.get('nombre')
         numero = request.POST.get('numero')
         seleccionados=None
+        desafios = None
+        rondas = None
+        desafios = request.POST.getlist('desafios')
+        rondas = request.POST.getlist('rondasdeliminaciones')
         seleccionados = request.POST.getlist('seleccionados')
+        print(seleccionados)
 
         listaEquipo = Equipo.objects.all()
         for i in seleccionados:
             for x in listaEquipo:
                 if int(i)==x.pk:
                     print(x.nombre)
-
-        listaEquipos = []
-
+        listaE = []
         for i in seleccionados:
-            equipo = Equipo.objects.get(pk=i)
-            listaEquipos.append(equipo)
+            equipo = get_object_or_404(Equipo, pk=i)
+            listaE.append(equipo)
+
+
+
+        listaRonda = RondaEliminacion.objects.all()
+        for i in rondas:
+            for x in listaRonda:
+                if int(i)==x.pk:
+                    print(x.nombre)
+        listaR = []
+        for i in rondas:
+            ronda = get_object_or_404(RondaEliminacion, pk=i)
+            listaR.append(ronda)
 
 
         temporada = Temporada(nombre=nombre, numero=numero)
         temporada.save()
-        temporada.listaEquipo.add(*listaEquipo)
+        temporada.listaEquipo.add(*listaE)
+        temporada.listaRondaEliminacion.add(*listaR)
+
         return redirect('temporada', pk=temporada.pk) 
     equipos = Equipo.objects.all()
     desafios = Desafio.objects.all()

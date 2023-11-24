@@ -22,7 +22,7 @@
     <div class="lista-seleccion">
         {% for desafio in desafios %}
             <label class="label-seleccion">
-                <input type="checkbox" name="seleccionados" value="{{ desafio.id }}">
+                <input type="checkbox" name="desafios" value="{{ desafio.id }}">
                 {{ desafio.nombre }}
             </label><br>
         {% endfor %}
@@ -30,7 +30,7 @@
     <div class="lista-seleccion">
         {% for i in rondaEliminaciones %}
             <label class="label-seleccion">
-                <input type="checkbox" name="seleccionados" value="{{ i.id }}">
+                <input type="checkbox" name="rondas" value="{{ i.id }}">
                 Ronda de eliminacion: {{ i.desafio.nombre }}
             </label><br>
         {% endfor %}

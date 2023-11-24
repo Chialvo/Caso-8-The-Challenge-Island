@@ -9,7 +9,9 @@ urlpatterns = [
     path('homeAdmin/', views.homeAdmin, name='homeAdmin'),
     path('accionAdmin/<int:num>/', views.accionAdmin, name='accionAdmin'),
     path('modificacionAdmin/<int:num>/', views.modificacionAdmin, name='modificacionAdmin'),
+    path('eliminacionAdmin/<int:num>/', views.eliminacionAdmin, name='eliminacionAdmin'),
     path('modificarForm/<int:num>/', views.modificarForm, name='modificarForm'),
+    path('eliminarForm/<int:num>/', views.eliminarForm, name='eliminarForm'),
 
     path('participantes/', views.participantes, name='participantes'),
     path('participante/<int:pk>/', views.participante, name='participante'), 

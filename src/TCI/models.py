@@ -114,14 +114,12 @@ class Temporada(models.Model):
     listaEquipo = models.ManyToManyField("Equipo")
     listaAlianza = models.ForeignKey(Alianza, on_delete=models.CASCADE, null=True, blank=True)
     listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
-    listaRondaEliminacion = models.ForeignKey(RondaEliminacion, on_delete=models.CASCADE, null=True, blank=True)
+    listaRondaEliminacion = models.ManyToManyField(RondaEliminacion, null=True, blank=True)
     foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile')
-    
-    
 
     def __str__(self):
-        return f'"{self.nombre}" temporada numero {self.numero}' 
-    
+        return f'"{self.nombre}" temporada numero {self.numero}'
+
     def listaEquipos(self):
         pass
     
