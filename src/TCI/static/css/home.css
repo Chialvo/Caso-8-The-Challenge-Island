@@ -72,13 +72,13 @@ main{
 
 .home-agrupador img{
     height: 45vh;
-    width: 45vh;
+    min-width: 45vh;
     border-radius: 50%;
     border: #a9cd5b solid 10px;
 }
 
 .home-descripcion{
-    margin-left: 50px;
+    margin:0 50px;
     height: 80%;
     display: flex;
     flex-direction: column;

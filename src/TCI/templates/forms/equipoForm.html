@@ -11,7 +11,7 @@
     <div class="lista-seleccion">
         {% for participante in participantes %}
             <label class="label-seleccion">
-                <input type="checkbox" name="seleccionados" value="{{ participantes.id }}">
+                <input type="checkbox" name="seleccionadosp" value="{{ participante.pk }}">
                 {{ participante.nombre }} {{ participante.apellido }}
             </label><br>
         {% endfor %}
@@ -20,7 +20,7 @@
     <div class="lista-seleccion">
         {% for alianza in alianzas %}
         <label class="label-seleccion">
-            <input type="checkbox" name="seleccionados" value="{{ alianzas.id }}">
+            <input type="checkbox" name="seleccionadosa" value="{{ alianza.pk }}">
             {{ alianza.nombre }} {{ alianza.apellido }}
         </label><br>
         {% endfor %}

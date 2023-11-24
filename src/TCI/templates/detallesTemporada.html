@@ -6,7 +6,22 @@
 
 {% block content %}
 <main>
+    <div class="contenedor-imagen">
+        <img src="" alt="">
+    </div>
 
+    <section>
+        {% for i in temporada.listaEquipo %}
+        <a href="{% url 'equipo' i.pk %}" class="contenedor-equipo"><img src="i.foto" alt=""></a>
+        {% endfor %}
+    </section>
+    <section>
+        <ul>
+            {% for i in temporada.listaAlianza %}
+            <li>{{ i.nombre }}: {{ i.descripcion }}</li></li>
+            {% endfor %}
+        </ul>
+    </section>
 
 
 </main>

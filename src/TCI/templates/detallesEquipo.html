@@ -21,9 +21,11 @@
     
             <div class="lista-temporadas">
                 <h4>Listas de alianzas</h4>
+                {% for i in listaalianzas %}
                 <ul>
-                    <li><a href=""></a></li>
+                    <li>{{ i.nombre }}: {{ i.descripcion }}</li>
                 </ul>
+                {% endfor %}
             </div>
 
 

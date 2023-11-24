@@ -36,6 +36,13 @@ img{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: var(--color-5);
+    border: 3px solid var(--color-2);
+    padding: 20px;
+
+}
+.lista-participantes{
+    min-width: 50%;
 }
 
 a{
@@ -45,7 +52,7 @@ a{
 
 a:hover{
     text-decoration:dashed;
-    color: var(--color-4);
+    color: var(--color-2);
 }
 
 ul{

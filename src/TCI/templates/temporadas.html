@@ -9,7 +9,7 @@
 
         <div class="temporada-tarjeta">
             <h1>{{ temporada.numero }}</h1>
-            <a class="tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></a>
+            <a href="{% url 'temporada' temporada.pk %}" class="tarjeta-contenedor"><img src="static/img/02.jpg" alt=""></a>
             <h2>{{ temporada.nombre }}</h2>  
             <div class="tarjeta-descripcion">
                 {{ temporada.pk}}

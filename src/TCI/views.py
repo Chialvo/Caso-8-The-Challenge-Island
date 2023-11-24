@@ -31,8 +31,12 @@ def temporadas(request):
 @login_required
 def temporada(request,pk):
     temporada = Temporada.objects.get(pk=pk)
-    nombre = temporada.nombre
-    return render(request, "detallesEquipo.html", {'nombre': nombre})
+    print(temporada.listarEquipos())
+    print(temporada.listarDetallesDesafios())
+    print(temporada.listaRondasELiminacion())
+    print(temporada.conocerDesafios())
+    print("________"*5)
+    return render(request, "detallesTemporada.html", {'temporada': temporada})
 
 @login_required
 def equipos(request):
@@ -44,9 +48,10 @@ def equipo(request, pk):
     equipo = Equipo.objects.get(pk=pk)
     nombre = equipo.nombre
     listaParticipantes = equipo.listarparticipantes()
-    print('---'*10      )
+    listaalianzas = equipo.listaralianza()
+
     print(listaParticipantes)
-    return render(request, "detallesEquipo.html", {'nombre': nombre, 'listaParticipantes': listaParticipantes})
+    return render(request, "detallesEquipo.html", {'nombre': nombre, 'listaParticipantes': listaParticipantes, 'listaalianzas':listaalianzas})
 
 
 
@@ -429,30 +434,21 @@ def temporadaForm(request):
 def equipoForm(request):
     if request.method == 'POST':
         nombre_equipo = request.POST.get('nombre_equipo')
-        seleccionadosp=None
-        seleccionadosa=None
         seleccionadosp = request.POST.getlist('seleccionadosp')
         seleccionadosa = request.POST.getlist('seleccionadosa')
+        equipo = Equipo(nombre=nombre_equipo)
+        equipo.save()
 
         participantes = Participante.objects.all()
-        for i in seleccionadosp:
-            for x in participantes:
-                if int(i)==x.pk:
-                    print(x.nombre)
         for participante_id in seleccionadosp:
             participante = Participante.objects.get(pk=participante_id)
             equipo.participantes.add(participante)
-
+            print("*****")
+            print(equipo.participantes)
         alianzas = Alianza.objects.all()
-        for i in seleccionadosa:
-            for x in alianzas:
-                if int(i)==x.pk:
-                    print(x.nombre)
         for alianza_id in seleccionadosa:
             alianza = Alianza.objects.get(pk=alianza_id)
             equipo.alianzas.add(alianza)
-        equipo = Equipo(nombre=nombre_equipo)
-        equipo.save()
         return redirect('equipo', pk=equipo.pk)
     alianzas = Alianza.objects.all()
     participantes = Participante.objects.all()
