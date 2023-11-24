@@ -89,7 +89,7 @@ class Desafio(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=100)
     equipos = models.ManyToManyField('Equipo')
-    reglas = models.ForeignKey(Regla, on_delete=models.CASCADE)
+    reglas = models.ManyToManyField("Regla")
 
 class Detalle_desafio(models.Model):
     puntos = models.IntegerField(unique=True, default=0)
@@ -100,7 +100,7 @@ class Detalle_desafio(models.Model):
 class RondaEliminacion(models.Model):
     fechaRondaEliminacion = models.DateField()
     eliminado = models.ForeignKey(Equipo, on_delete=models.CASCADE)
-    desafios = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
+    desafio = models.ForeignKey(Desafio, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Ronda de eliminación ({self.fechaRondaEliminacion})'

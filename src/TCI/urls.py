@@ -23,6 +23,13 @@ urlpatterns = [
     #-----Formularios para crear-----#
     path('temporadaForm/', views.temporadaForm, name='temporadaForm'),
     path('equipoForm/', views.equipoForm, name='equipoForm'),
-    path('participanteForm/', views.participanteForm, name='participanteForm'), 
+    path('participanteForm/', views.participanteForm, name='participanteForm'),
+    path('paisForm/', views.paisForm, name='paisForm'),
+    path('habilidadForm/', views.habilidadForm, name='habilidadForm'),
+    path('reglaForm/', views.reglaForm, name='reglaForm'),
+    path('alianzaForm/', views.alianzaForm, name='alianzaForm'),
+    path('desafioForm/', views.desafioForm, name='desafioForm'),
+    path('rondaEliminacionForm/', views.rondaEliminacionForm, name='rondaEliminacionForm'),
 
     ]
+

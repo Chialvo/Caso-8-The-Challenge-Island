@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/participanteForm.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin/admin.css' %}">
+{% endblock %}
+{% block content %}
+<form class="tarjeta" method="post">
+    {% csrf_token %}
+    <input type="text"  name="nombre" id="nombre" value="{{ objeto_seleccionado.nombre }}" required class="input-general" placeholder="Nombre"><br>
+    <button class="submit-general" type="submit">Guardar País</button>
+    <a class="boton-volver" href="{% url 'accionAdmin' num=4 %}">Volver</a>
+</form>
+{% endblock %}

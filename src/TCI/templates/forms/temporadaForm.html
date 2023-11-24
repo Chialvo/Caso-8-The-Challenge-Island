@@ -6,11 +6,37 @@
 {% endblock %}
 {% block content %}
 <form class="tarjeta" method="post">
-        {% csrf_token %}
-        <input class="input-general" type="text" name="nombre" id="nombre" required placeholder="Nombre"><br>
-        <input class="input-general" type="number" name="numero" id="numero" required placeholder="Numero"><br>
-        <button class="submit-general" type="submit">Crear Temporada</button>
-        <a class="boton-volver" href="{% url 'accionAdmin' num=1 %}">Volver</a>
+    {% csrf_token %}
+    <input type="text" name="nombre" id="nombre" value="{% if objeto_seleccionado %}{{ objeto_seleccionado.nombre }}{% endif %}" required class="input-general" placeholder="Nombre"><br>
+    <input type="number" name="numero" id="numero" value="{% if objeto_seleccionado %}{{ objeto_seleccionado.numero }}{% endif %}" required class="input-general" placeholder="Numero"><br>
+    
+    <div class="lista-seleccion">
+        {% for equipo in equipos %}
+            <label class="label-seleccion">
+                <input type="checkbox" name="seleccionados" value="{{ equipo.id }}"
+                       {% if temporada and equipo in temporada.listaEquipo.all %}checked{% endif %}>
+                {{ equipo.nombre }}
+            </label><br>
+        {% endfor %}
+    </div>
+    <div class="lista-seleccion">
+        {% for desafio in desafios %}
+            <label class="label-seleccion">
+                <input type="checkbox" name="seleccionados" value="{{ desafio.id }}">
+                {{ desafio.nombre }}
+            </label><br>
+        {% endfor %}
+    </div>
+    <div class="lista-seleccion">
+        {% for i in rondaEliminaciones %}
+            <label class="label-seleccion">
+                <input type="checkbox" name="seleccionados" value="{{ i.id }}">
+                Ronda de eliminacion: {{ i.desafio.nombre }}
+            </label><br>
+        {% endfor %}
+    </div>
+    
+    <button type="submit" class="submit-general">Crear Temporada</button>
+    <a href="{% url 'accionAdmin' num=1 %}" class="boton-volver">Volver</a>
 </form>
-
 {% endblock %}
