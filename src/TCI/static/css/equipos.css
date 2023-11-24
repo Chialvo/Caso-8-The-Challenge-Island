@@ -9,7 +9,7 @@
 .equipo-tarjeta{
     margin: 5vh ;
     width: 25vw;
-    height: 60vh;
+    height: 45vh;
     border: 2px solid black;
     display: flex;
     align-items: center;
@@ -31,6 +31,7 @@
     transition: all .3s;
 }
 .equipo-tarjeta h2{
+    margin-top: 1vw;
     font-size: larger;
 }
 

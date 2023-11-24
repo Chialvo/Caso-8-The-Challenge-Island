@@ -6,7 +6,7 @@ from django.contrib.auth import logout
 from django.db.models import Q
 from .funcionalidades import *
 import datetime
-
+from django.contrib.auth.models import User
 
 def home(request):
     busqueda = request.GET.get('buscador')
@@ -589,3 +589,16 @@ def rondaEliminacionForm(request):
     desafios = Desafio.objects.all()
     equipos = Equipo.objects.all()
     return render(request, 'forms/rondaEliminacionForm.html', {'desafios': desafios , 'equipos': equipos})
+
+
+def register_view(request):
+    if request.method == 'GET':
+        return render(request, 'registration/register.html')
+
+    if request.method == 'POST':
+        nombre = request.POST.get('name')
+        mail = request.POST.get('email')
+        password = request.POST.get('password')      
+
+        user = User.objects.create_user(username=nombre, email=mail, password=password)        
+        return redirect('login')

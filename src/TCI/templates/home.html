@@ -8,26 +8,27 @@
     <div class="home-header-textos">
         <h1 class="home-texto">Bienvenidos a</h1>
         <h1 class="home-texto">The Challenge Island</h1>
+        {% if not user.is_authenticated %}
         <a href="{% url 'login' %}" class="home-inicio_sesion">Inicia sesion</a>
-
+        {% endif %}
     </div>
 
 </header>
 <main>
     <div class="home-agrupador">
-        <img src="../static/img/01.jpg" alt="">
+        <img src="https://imgs.search.brave.com/MPddZFh9Y270P5hYZV1SgGfTTBUigh7CXoKajBIho1g/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9pc2xhLXRyb3Bp/Y2FsLWRpYnVqb3Mt/YW5pbWFkb3MtcGFs/bWVyYXMtcGxheWEt/YXJlbmEtZ2VuZXJh/dGl2YS1haV85NTgx/MDgtMTkwMDguanBn/P3NpemU9NjI2JmV4/dD1qcGc" alt="">
         <div class="home-descripcion">
             <p>"The Challenge Island" es un reality show que se desarrolla en una isla remota y reúne a un grupo de participantes dispuestos a enfrentar desafíos físicos y mentales extremos. Cada temporada del programa presenta varios equipos compuestos por individuos de diversos ámbitos, como atletas, celebridades y personas comunes con habilidades especiales. Cada participante se asigna a un equipo al inicio de la temporada y representa a ese equipo a lo largo del programa. Los televidentes pueden acceder a los datos personales de cada participante, incluyendo su nombre, apellido, país de origen, habilidades especiales y apodo.</p>
         </div>
     </div>
     <div class="home-agrupador row-reverse">
-        <img src="../static/img/02.jpg" alt="">
+        <img src="https://imgs.search.brave.com/hYHJcE2kMTsrBvEDCV6rV1r6hFx-QKB7vyRRW7TvJd4/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/aW1hZ2VzLmV4cHJl/c3MuY28udWsvaW1n/L2R5bmFtaWMvMjAv/NTkweC9zZWNvbmRh/cnkvVGhlLUlzbGFu/ZC13aXRoLUJlYXIt/R3J5bGxzLXdoZXJl/LWlzLWl0LWZpbG1l/ZC1sb2NhdGlvbi1p/c2xhbmRzLTkxMTMw/OC5qcGc_cj0xNjg2/OTk4NjgwMTYw" alt="">
         <div class="home-descripcion">
             <p>Estos equipos compiten en una amplia variedad de desafíos que van desde pruebas de resistencia física y habilidades atléticas hasta acertijos mentales y desafíos estratégicos. Cada desafío tiene reglas específicas, y los equipos deben superarlos para obtener puntos o recompensas. Además de los desafíos, hay rondas de eliminación en las que los equipos se enfrentan entre sí, ya sea en pruebas físicas o de habilidad, y el equipo perdedor es eliminado del programa.</p>
         </div>
     </div>
     <div class="home-agrupador">
-        <img src="../static/img/03.jpg" alt="">
+        <img src="https://imgs.search.brave.com/rchD9wfv9M3yYZlyW-xPrWDkiMx5fep79yjBVyeFHBM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9nYW1l/Zm9yZ2UuY29tL2Rl/LURFL2xpdHRsZWdh/bWVzL2luY2x1ZGVz/L2ltYWdlcy9nYW1l/cy83MzIyXzVlYjNl/YmM4MzZlODQuanBn" alt="">
         <div class="home-descripcion">
             <p>A lo largo de la temporada, los equipos pueden formar alianzas estratégicas con otros equipos para fortalecer sus posibilidades de éxito, aunque estas alianzas son temporales y tienen como objetivo ayudar a los equipos a avanzar en el juego. Al final de cada temporada, se declara un equipo ganador, basado en su rendimiento en los desafíos y eliminaciones.</p>
 

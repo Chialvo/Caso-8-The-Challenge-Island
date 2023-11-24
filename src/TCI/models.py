@@ -34,7 +34,7 @@ class Participante(models.Model):
     estadoParticipacion = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     habilidad = models.ForeignKey(Habilidad, on_delete=models.CASCADE)
-    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile.jpg')
+    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='src/TCI/static/img/defaultprofile.jpg')
 
     def __str__(self) -> str:
         return f"{self.nombre}"
@@ -63,7 +63,7 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     participantes = models.ManyToManyField('Participante')
     alianzas = models.ManyToManyField('Alianza')
-    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile')
+    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='src/TCI/static/img/predeterminadoGrupo.png')
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)

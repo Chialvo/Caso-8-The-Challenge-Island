@@ -410,3 +410,18 @@ footer {
     color: #209e60; /* Cambia el color del texto */
     font-size: larger;
 }
+
+.nav-contenedor{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-image: url("../img/TCI1.png");
+    background-size: cover;
+    background-position: center;
+    transition: all .3s;
+}
+
+.nav-contenedor:hover{
+    scale: 1.1;
+    transition: all .3s;
+}

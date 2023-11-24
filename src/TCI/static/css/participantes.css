@@ -30,6 +30,16 @@
 
 }
 
+.participante-tarjeta-contenedor img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    transition: all .3s;
+    
+}
+
 .participante-tarjeta-contenedor:hover{
     scale: 1.1;
     transition: all .3s;
