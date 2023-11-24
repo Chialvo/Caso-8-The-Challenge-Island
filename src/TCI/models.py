@@ -63,7 +63,7 @@ class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     participantes = models.ManyToManyField('Participante')
     alianzas = models.ManyToManyField('Alianza')
-    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='src/TCI/static/img/predeterminadoGrupo.png')
+    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='src/TCI/static/img/predeterminadoEquipo.png')
 
     def conoceraparticipantes(self, participante):
         self.participantes.add(participante)
@@ -119,7 +119,7 @@ class Temporada(models.Model):
     listaAlianzas = models.ManyToManyField(Alianza, blank=True)
     listaDetalleDesafio = models.ManyToManyField("Detalle_desafio", related_name="temporada_detalle_desafio")
     listaRondaEliminacion = models.ManyToManyField(RondaEliminacion, null=True, blank=True)
-    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='static/img/defaultprofile')
+    foto = models.ImageField(upload_to='static/img/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])], default='src/TCI/static/img/predeterminadoTemporada.png')
 
     def __str__(self):
         return f'"{self.nombre}" temporada numero {self.numero}'

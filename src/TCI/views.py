@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 def home(request):
     busqueda = request.GET.get('buscador')
     if busqueda:
-        resultado = buscarTemporada(request, busqueda)
+        resultado = buscarTemporada(busqueda)
         return render(request, 'temporadas.html', {'temporadas': resultado})
     return render(request, "home.html")
 
@@ -30,6 +30,10 @@ def temporadas(request):
 
 @login_required
 def temporada(request,pk):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     temporada = get_object_or_404(Temporada, pk=pk)
     participantes = temporada.obtener_participantes_temporada()
     participantes = list(set(participantes))
@@ -40,11 +44,19 @@ def temporada(request,pk):
 
 @login_required
 def equipos(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarEquipo(busqueda)
+        return render(request, 'equipos.html', {'equipos': resultado})
     equipos = Equipo.objects.all()
     return render(request, "equipos.html", {'equipos': equipos })
 
 @login_required
 def equipo(request, pk):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarEquipo(busqueda)
+        return render(request, 'equipos.html', {'equipos': resultado})
     equipo = Equipo.objects.get(pk=pk)
     nombre = equipo.nombre
     listaParticipantes = equipo.listarparticipantes()
@@ -92,10 +104,18 @@ def participante(request, pk):
 
 @login_required
 def homeAdmin(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     return render(request, "admin/homeAdmin.html")
 
 @login_required
 def accionAdmin(request, num):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     nombre_dict = {
         1: 'Temporada',
         2: 'Equipo',
@@ -126,6 +146,10 @@ def accionAdmin(request, num):
 
 @login_required
 def modificacionAdmin(request, num):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     lista =None
     if num == 1:
         lista = Temporada.objects.all()
@@ -152,6 +176,10 @@ def modificacionAdmin(request, num):
 
 @login_required
 def eliminacionAdmin(request, num):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     lista =None
     if num == 1:
         lista = Temporada.objects.all()
@@ -178,6 +206,10 @@ def eliminacionAdmin(request, num):
 
 @login_required
 def modificarForm(request, num):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     objeto_seleccionado = None
     template_name = None
     desafios = Desafio.objects.all()
@@ -353,6 +385,10 @@ def modificarForm(request, num):
 
 @login_required
 def eliminarForm(request, num):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if num == 1:
         objeto_seleccionado = get_object_or_404(Temporada, pk=request.GET.get('seleccion'))
         objeto_seleccionado.delete()
@@ -386,6 +422,10 @@ def eliminarForm(request, num):
     
 @login_required
 def temporadaForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         numero = request.POST.get('numero')
@@ -413,6 +453,10 @@ def temporadaForm(request):
 
 @login_required
 def equipoForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarEquipo(busqueda)
+        return render(request, 'equipos.html', {'equipos': resultado})
     equipo = None  # Inicializar equipo con None
 
     if request.method == 'POST':
@@ -493,6 +537,10 @@ def participanteForm(request):
 
 @login_required
 def paisForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         pais = Pais(nombre=nombre)
@@ -503,6 +551,10 @@ def paisForm(request):
 
 @login_required
 def alianzaForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
@@ -515,6 +567,10 @@ def alianzaForm(request):
 
 @login_required
 def habilidadForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
@@ -525,6 +581,10 @@ def habilidadForm(request):
 
 @login_required
 def reglaForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
@@ -536,6 +596,10 @@ def reglaForm(request):
 
 @login_required
 def desafioForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
@@ -562,6 +626,10 @@ def desafioForm(request):
 
 @login_required
 def rondaEliminacionForm(request):
+    busqueda = request.GET.get('buscador')
+    if busqueda:
+        resultado = buscarTemporada(busqueda)
+        return render(request, 'temporadas.html', {'temporadas': resultado})
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
         eliminado = request.POST.get('eliminado')

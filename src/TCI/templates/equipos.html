@@ -11,7 +11,7 @@
     <div class="equipo-tarjeta">
         
         <a href="{% url 'equipo' equipo.pk %}" class="equipo-tarjeta-contenedor">
-            <img src="{{ equipo.foto.url }}" alt="{{ equipo.nombre }}">
+            <img src="{% static 'img/predeterminadoEquipo.png' %}" alt="{{ equipo.nombre }}">
         </a>
         <h2>{{ equipo.nombre }}</h2>  
 
